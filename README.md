@@ -48,6 +48,7 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 ## Requirements
 
 * Developed and tested on `Linux (Ubuntu 20.04)`.
+* Source code developed in `C++11`.
 * Compiler: developed & tested with `g++ 13.1.0`.
 * The `Eigen C++ Template Library` for the `Linear Algebra`; version used: `3.4.0`.
 * `CMake` for building the software etc.
