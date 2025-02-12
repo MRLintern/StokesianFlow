@@ -27,6 +27,7 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 * The shape of the `domain` is a rectangle of `height H` and `width W`. Values for these: `H = 2m` and `W = 6m`.
 * `Dynamic Viscosity, mu = 1 N.s/m^2`.
 * `Pressure Gradient, dp/dz = -8 N/m^3`.
+* The `mesh/discretisised domain` consists of `100 x 100` `nodes/points`.
 
 ## Finite Element Method (FEM)
 
