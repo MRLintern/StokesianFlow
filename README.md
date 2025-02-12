@@ -1,6 +1,6 @@
 # Viscous River
 
-Note: this is a work-in-progress; bare with me!
+Note: this is a work-in-progress. 
 
 ## Introduction
 
