@@ -98,3 +98,5 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 ## Getting & Running the Software
 
 `$ git clone https://github.com/MRLintern/viscousRiver.git`
+
+* Once the software has been developed, further instructions on building and running it will be available. 
