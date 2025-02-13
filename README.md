@@ -1,6 +1,8 @@
 # Viscous River
 
-Note: this is a work-in-progress. 
+* Note: this project makes use of a lot material from the book ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
+* Fenner provides a `Fortran 77` solver for the problem we're looking at.
+* My solution to the case study involves refactoring the software into __C++11__, utilising __OOD__ principles and the __Eigen Template Library__. 
 
 ## Introduction
 
@@ -27,7 +29,18 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 * The shape of the `domain` is a rectangle of `height H` and `width W`. Values for these: `H = 2m` and `W = 6m`.
 * `Dynamic Viscosity, mu = 1 N.s/m^2`.
 * `Pressure Gradient, dp/dz = -8 N/m^3`.
-* The `mesh/discretisised domain` consists of `100 x 100` `nodes/points`.
+* The __Flow Rate__ through the channel/river is given by 
+
+	`R = (1/2)*W*H*Vz*F_D - (1/2mu)*W*H^3*F_P`
+
+* `F_D`: ___Drag Factor___; associated with the drag flow induced by the boundary velocity `Vz`.
+* `F_P`: ___Pressure Flow Shape___; due to the pressure gradient `p'` or `dp/dz`. 
+* The values of `F_D` & `F_P` provide an important ratio in modelling channel flow problems: the `aspect ratio`, `H/W`.
+* `H/W = 0.5` for this problem.
+* Properties:
+
+	- __Shallow and wider channels__: larger wetted perimeter leading to increased friction and slower flow velocities.
+	- __Deeper and narrower channels__: smaller wetted perimeter resulting in less friction and faster flow velocities.
 
 ## Finite Element Method (FEM)
 
@@ -48,7 +61,6 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 ## Requirements
 
 * Developed and tested on `Linux (Ubuntu 20.04)`.
-* Source code developed in `C++11`.
 * Compiler: developed & tested with `g++ 13.1.0`.
 * The `Eigen C++ Template Library` for the `Linear Algebra`; version used: `3.4.0`.
 * `CMake` for building the software etc.
@@ -99,5 +111,3 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 ## Getting & Running the Software
 
 `$ git clone https://github.com/MRLintern/viscousRiver.git`
-
-* Once the software has been developed, further instructions on building and running it will be available. 
