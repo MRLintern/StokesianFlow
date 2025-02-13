@@ -29,7 +29,7 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 * The shape of the `domain` is a rectangle of `height H` and `width W`. Values for these: `H = 2m` and `W = 6m`.
 * `Dynamic Viscosity, mu = 1 N.s/m^2`.
 * `Pressure Gradient, dp/dz = -8 N/m^3`.
-* The __Flow Rate__ through the channel/river is given by 
+* The ___Flow Rate___ through the channel/river is given by 
 
 	`R = (1/2)*W*H*Vz*F_D - (1/2mu)*W*H^3*F_P`
 
