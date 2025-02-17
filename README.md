@@ -26,8 +26,8 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 
 * `Boundary Conditions (BCs)`: At the bottom and sides of the channel/river: `v = 0 m/s`. At the top (surface): `v = vz`.
 
-  	- Dirichlet BCs along the bottom and sides of the channel.
-  	- Neumann BCs at the top; surface of the channel.
+  	- __Dirichlet BCs__ along the bottom and sides of the channel.
+  	- __Neumann BCs__ at the top; surface of the channel.
 
 * The shape of the `domain` is a rectangle of `height H` and `width W`. Values for these: `H = 2m` and `W = 6m`.
 * `Dynamic Viscosity, mu = 1 N.s/m^2`.
