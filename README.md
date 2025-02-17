@@ -39,7 +39,7 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 * `F_D`: ___Drag Factor___; associated with the drag flow induced by the boundary velocity `Vz`.
 * `F_P`: ___Pressure Flow Shape___; due to the pressure gradient `p'` or `dp/dz`. 
 * The values of `F_D` & `F_P` provide an important ratio in modelling channel flow problems: the `aspect ratio`, `H/W`.
-* Both the `F_D` & `F_P` are __Hyperbolic Functions__. 
+* Both the `F_D` & `F_P` factors are __Hyperbolic Functions__. 
 * `H/W = 0.5` for this problem.
 * Properties:
 
