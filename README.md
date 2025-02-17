@@ -111,6 +111,8 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 
 * And you're set! See the test program in `eigen_test` to ensure everything is working.
 
+* Inside the `eigen_test` folder, execute the following at the CLI:
+
 `$ g++ main.cpp -o main`
 
 
