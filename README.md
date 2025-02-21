@@ -6,7 +6,7 @@
 
 ### TODO
 * Source file, `main.cpp`, uploaded.
-* Need to sort this out though: ERROR: `error: static assertion failed: YOU_TRIED_CALLING_A_VECTOR_METHOD_ON_A_MATRIX`; to be resolved in the next few days.
+* Need to sort this out:`error: static assertion failed: YOU_TRIED_CALLING_A_VECTOR_METHOD_ON_A_MATRIX`; to be resolved in the next few days.
 * Use better Software Engineering principles and tools. I.e.
    - `CMake`.
    - `Unit Testing`. This isn't a massive code base, so I'll do this last (I imagine).
