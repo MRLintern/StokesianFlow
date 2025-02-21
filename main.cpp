@@ -467,5 +467,4 @@ int main() {
     std::cout<<"totalElements, Center of Mass (of Elements) and Area of Elements in file c2.dat"<<"\n";
     std::cout<<"Nodes and Velocity at Nodes in file c4.dat"<<"\n";
 
-
 }
