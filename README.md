@@ -2,7 +2,15 @@
 
 * Note: this project makes use of a lot material from the book ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
-* My solution to the case study involves refactoring the software into __C++11__, utilising __OOD__ principles and the __Eigen Template Library__. 
+* My solution to the case study involves refactoring the software into __C++11__, utilising __OOD__ principles and the __Eigen Template Library__.
+
+### TODO
+* Source file, `main.cpp`, uploaded.
+* Need to sort this out though: ERROR: `error: static assertion failed: YOU_TRIED_CALLING_A_VECTOR_METHOD_ON_A_MATRIX`; to be resolved in the next few days.
+* Use better Software Engineering principles and tools. I.e.
+   - `CMake`.
+   - `Unit Testing`. This isn't a massive code base, so I'll do this last (I imagine).
+   - Code organisation. I.e. classes into header files etc.
 
 ## Introduction
 
