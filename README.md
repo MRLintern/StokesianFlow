@@ -129,5 +129,8 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 
 * `$ git clone https://github.com/MRLintern/viscousRiver.git`
 * `$ cd viscousRiver`
+* `$ g++ main.cpp -o main`
+* `$ ./main`
+* __TODO__; not using `CMake` yet.
 * `$ mkdir build && cd build`
 * `$ cmake ..`
