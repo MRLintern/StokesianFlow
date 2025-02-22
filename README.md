@@ -6,7 +6,7 @@
 
 ### TODO
 * Source file, `main.cpp`, uploaded.
-* Need to sort this out:`error: static assertion failed: YOU_TRIED_CALLING_A_VECTOR_METHOD_ON_A_MATRIX`; to be resolved in the next few days.
+* Need to sort this out:`error: `Assertion `row >= 0 && row < rows() && col >= 0 && col < cols()' failed.`; to be resolved in the next few days.
 * Use better Software Engineering principles and tools. I.e.
    - `CMake`.
    - `Unit Testing`. This isn't a massive code base, so I'll do this last (I imagine).
@@ -131,6 +131,7 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 * `$ cd viscousRiver`
 * `$ g++ main.cpp -o main`
 * `$ ./main`
+* Press 1 for `verbose mode`; you'll get the node and element values. Press 0 if you don't want to see these.
 * __TODO__; not using `CMake` yet.
 * `$ mkdir build && cd build`
 * `$ cmake ..`
