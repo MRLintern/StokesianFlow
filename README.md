@@ -53,8 +53,9 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 
 	- __Shallow and wider channels__: larger wetted perimeter leading to increased friction and slower flow velocities.
 	- __Deeper and narrower channels__: smaller wetted perimeter resulting in less friction and faster flow velocities.
-* The number of nodes in the `x-direction` is given by `NodeX`. Those in the `y-direction`: `NodeY`.
-* The __mesh__ of the problem domain consists of `40 x 40 nodal points`. Note: it might be interesting seeing what happens with smaller and larger numbers of nodal points.
+* The number of nodes (___vertices___) in the `x-direction` is given by `NodeX`. Those in the `y-direction`: `NodeY`.
+* The __mesh__ of the problem domain consists of `6 x 6 nodal points`.
+* The number of __triangular elements__ that make up the mesh is denoted by `elementNumber`.
 
 ## Finite Element Method (FEM)
 
