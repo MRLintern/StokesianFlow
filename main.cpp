@@ -113,11 +113,11 @@ matrixElement nodeElement;
 double area(element e) {
 
 	// x components
-	double a1 = Node[nodeElement(e, 1)].x - Node[nodeElement(e, 0)].x;
-	double a2 = Node[nodeElement(e, 0)].x - Node[nodeElement(e, 2)].x;
+	double a1 {Node[nodeElement(e, 1)].x - Node[nodeElement(e, 0)].x};
+	double a2 {Node[nodeElement(e, 0)].x - Node[nodeElement(e, 2)].x};
 	// y components
-	double b1 = Node[nodeElement(e, 0)].y - Node[nodeElement(e, 1)].y;
-	double b2 = Node[nodeElement(e, 2)].y - Node[nodeElement(e, 0)].y;
+	double b1 {Node[nodeElement(e, 0)].y - Node[nodeElement(e, 1)].y};
+	double b2 {Node[nodeElement(e, 2)].y - Node[nodeElement(e, 0)].y};
 
 	return 0.5*(a1*b2 - a2*b1);
 }
@@ -132,13 +132,13 @@ Vector2D com(element e) {
 
 int main() {
 
-	// should the user want more messages r.e. program and instructions etc
+	// should user want to display node, element values etc at the CLI
 	int verbose{0}; 
-	std::cout<<"Enter 1 for verbose mode:\n";
+	std::cout<<"Enter 1 for verbose mode, 0 if not:\n";
 	std::cin>>verbose;
 
 	// number of nodes in the x & y direction
-	int NodeX{}, NodeY{};
+	int NodeX{6}, NodeY{6};
 
 	// H/W ratio
 	double HW{0.5};
@@ -151,23 +151,18 @@ int main() {
 
 	// file objects for output data; file extension: .dat
 	std::ofstream meshPts, eleProp, uSol;
-	// std::ofstream file3;
+	
 	// open files
 	meshPts.open("meshPoints.dat"); // mesh coordinates of channel
 	eleProp.open("elementProperties.dat"); // elements, center of mass of elements and area of elements
-	//file3.open("c3.dat"); 
 	uSol.open("uSolution.dat"); // for solution , u, at nodes
-
-	// user to input some data r.e. nodes and elements
-	std::cout<<"Enter the Number of Nodes in the x and y direction:\n";
-	std::cin>>NodeX>>NodeY;
 
 	// the total number of nodes for the mesh is given by NodeX x NodeY
 	int totalNodes {NodeX*NodeY};
 
 	// verbose mode
-	std::cout<<"Enter 1 for verbose mode: "<<"\n";
-	std::cin>>verbose;
+	//std::cout<<"Enter 1 for verbose mode: "<<"\n";
+	//std::cin>>verbose;
 
 	// total number of elements of the mesh
 	int totalElements {(NodeX - 1)*(NodeY - 1)*2}; // a rectangular area
@@ -185,7 +180,7 @@ int main() {
 	Eigen::VectorXd f(totalNodes); // force acting on fluid; the only force we consider is the contribution of the pressure gradient
 
 	// stiffness matrix; represents the system of linear equations that relates the nodal displacements of the fluid to the forces acting on them
-	Eigen::MatrixXd K(totalNodes);
+	Eigen::MatrixXd K(totalNodes, totalNodes);
 
 	// -------------------------------------------------------------------------------------------
 
@@ -200,7 +195,7 @@ int main() {
 	// starting node
 	node nodeNumber{0};
 
-	// iterate accross rectangle of nodes for (x, y)
+	// iterate across rectangle of nodes for (x, y)
 	for (int iy{0}; iy < NodeY; iy++) {
 		for (int ix{0}; ix < NodeX; ix++) {
 
@@ -259,46 +254,46 @@ int main() {
 		}
 	}
 
-  if (verbose) {
+    if (verbose) {
 
-		std::cout<<" ---------- "<<"\n";
+			std::cout<<" ---------- "<<"\n";
 
-		// print out mesh data to channel.dat file
-		for (element e{0}; e < totalElements; e++) {
+			// print out mesh data to channel.dat file
+			for (element e{0}; e < totalElements; e++) {
 
-			meshPts<<Node[nodeElement(e, 0)]<<" "<<Node[nodeElement(e, 1)]<<"\n";
-			meshPts<<Node[nodeElement(e, 1)]<<" "<<Node[nodeElement(e, 2)]<<"\n";
-			meshPts<<Node[nodeElement(e, 2)]<<" "<<Node[nodeElement(e, 0)]<<"\n";
-			// center of mass and area of elements
-			eleProp<<e<<" "<<com(e)<<" "<<area(e)<<"\n";
+				meshPts<<Node[nodeElement(e, 0)]<<" "<<Node[nodeElement(e, 1)]<<"\n";
+				meshPts<<Node[nodeElement(e, 1)]<<" "<<Node[nodeElement(e, 2)]<<"\n";
+				meshPts<<Node[nodeElement(e, 2)]<<" "<<Node[nodeElement(e, 0)]<<"\n";
+				// center of mass and area of elements
+				eleProp<<e<<" "<<com(e)<<" "<<area(e)<<"\n";
 
 			}
 	}
 
 	// see // -- Vector & Matrix constructors for FEM for more info
-  // configure stiffness matrix for finite element method (FEM)
-  // [K]{u} = {f}
-  // K = stiffness matrix; contains the system of linear equations
-  // u = nodal vector; fluid flow rate
-  // f = force; pressure gradient acting on the fluid
-  for (element e{0}; e < totalElements; e++) {
+    // configure stiffness matrix for finite element method (FEM)
+    // [K]{u} = {f}
+    // K = stiffness matrix; contains the system of linear equations
+    // u = nodal vector; fluid flow rate
+    // f = force; pressure gradient acting on the fluid
+    for (element e{0}; e < totalElements; e++) {
 
-    // these parameters act as weights for calculating the approx. value of K
-    // the values these parameters take on can be adjusted to balance accuracy and stability
-    std::array<double, 3> beta{};
-    std::array<double, 3> gamma{};
+    	// these parameters act as weights for calculating the approx. value of K
+    	// the values these parameters take on can be adjusted to balance accuracy and stability
+    	std::array<double, 3> beta{};
+    	std::array<double, 3> gamma{};
 
 
-    // find beta and gamma
-    for (int i{0}; i < 3; i++) {
+    	// find beta and gamma
+    	for (int i{0}; i < 3; i++) {
 
-    	int j {(i + 1) % 3};
-    	int k {(i + 1) % 3};
+    		int j {(i + 1) % 3};
+    		int k {(i + 1) % 3};
 
-    	beta[i] = Node[nodeElement(e, j)].y - Node[nodeElement(e, k)].y;
-    	gamma[i] = Node[nodeElement(e, k)].x - Node[nodeElement(e, j)].x;
+    		beta[i] = Node[nodeElement(e, j)].y - Node[nodeElement(e, k)].y;
+    		gamma[i] = Node[nodeElement(e, k)].x - Node[nodeElement(e, j)].x;
 
-    	if (verbose) {std::cout<<e<<" "<<i<<" "<<" "<<beta[i]<<" "<<gamma[i]<<"\n";}
+    		if (verbose) {std::cout<<e<<" "<<i<<" "<<" "<<beta[i]<<" "<<gamma[i]<<"\n";}
 
     	}
 
@@ -405,7 +400,7 @@ int main() {
     // find non-zero entries of the stiffness matrix
     int num{0};
 
-    // total K entries providing K isn't 0
+    // 
     for (node n{0}; n < totalNodes; n++) {
     	for (node m{0}; m < totalNodes; m++) {
 
@@ -460,11 +455,13 @@ int main() {
     delete[] Node;
     meshPts.close();
     eleProp.close();
+    //file3.close();
     uSol.close();
 
     // messages to explain files
-    std::cout<<"Mesh Coordinates in channel.dat"<<"\n";
-    std::cout<<"totalElements, Center of Mass (of Elements) and Area of Elements in file c2.dat"<<"\n";
-    std::cout<<"Nodes and Velocity at Nodes in file c4.dat"<<"\n";
+    std::cout<<"Mesh Coordinates in meshPoints.dat"<<"\n";
+    std::cout<<"totalElements, Center of Mass (of Elements) and Area of Elements in file elementProperties.dat"<<"\n";
+    std::cout<<"Nodes and Velocity at Nodes in file uSolution.dat"<<"\n";
+
 
 }
