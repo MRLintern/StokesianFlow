@@ -26,8 +26,8 @@ public:
 	// set up vector
 	void setVector(double x0, double y0) {x = x0; y = y0;};
 
-	// magnitude of vector; 2D Euclidean/Cartesian plane; p-norm, p = 2
-	double vectorMag() {
+	// metric: distance between 2 points in 2D plane
+	double distance() {
 
 		return sqrt(x*x + y*y);
 	}
