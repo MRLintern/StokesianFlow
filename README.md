@@ -6,7 +6,8 @@
 
 ### TODO
 * Source file, `main.cpp`, uploaded.
-* Need to sort this out:`error: `Assertion `row >= 0 && row < rows() && col >= 0 && col < cols()' failed.`; to be resolved in the next few days.
+* Error: `Assertion `row >= 0 && row < rows() && col >= 0 && col < cols()' failed.`; to be resolved in the next few days.
+* Error: Data not written to files.
 * Use better Software Engineering principles and tools. I.e.
    - `CMake`.
    - `Unit Testing`. This isn't a massive code base, so I'll do this last (I imagine).
