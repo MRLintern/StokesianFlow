@@ -5,7 +5,7 @@
 * My solution to the case study involves refactoring the software into __C++11__, utilising __OOD__ principles and the __Eigen Template Library__.
 
 ### TODO
-* Source file, `main.cpp`, uploaded.
+* New, `main.cpp`, uploaded. Added some comments, renamed some variables; all for better clarification. File compiles to binary, but still plagued with the error/issue below.
 * Error: `Assertion `row >= 0 && row < rows() && col >= 0 && col < cols()' failed.`; to be resolved in the next few days.
 * Error: Data not written to files.
 * Use better Software Engineering principles and tools. I.e.
