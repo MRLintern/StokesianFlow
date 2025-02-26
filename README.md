@@ -17,6 +17,7 @@
 
 This software consists of a `C++ solver` which solves the `Navier-Stokes Equation(s)` for a `viscous fluid` flowing in a `channel/river`.
 The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
+This software calculates the __Velocity__ and using this, the __Flow Rate__ through the channel.
 
 ## Model
 
@@ -33,11 +34,7 @@ The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting
 
 * `dp/dz`: This is the `Pressure Gradient`: the rate at which pressure changes over distance. Taken to be constant.
 
-* `Boundary Conditions (BCs)`: At the bottom and sides of the channel/river: `v = 0 m/s`. At the top (surface): `v = vz`.
-
-  	- __Dirichlet BCs__ along the bottom and sides of the channel.
-  	- __Neumann BCs__ at the top; surface of the channel.
-
+* __Dirichlet Boundary Conditions__ (BCs)`: At the bottom and sides of the channel/river: `v = 0 m/s`. At the top (surface): fixed `v = vz`.
 * The shape of the `domain` is a rectangle of `height H` and `width W`. Values for these: `H = 1m` and `W = 2m`.
 * `Dynamic Viscosity, mu = 1 N.s/m^2`.
 * `Pressure Gradient, dp/dz = -6 N/m^3`.
