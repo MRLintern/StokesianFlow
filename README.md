@@ -34,7 +34,7 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 
 * `dp/dz`: This is the `Pressure Gradient`: the rate at which pressure changes over distance. Taken to be constant.
 
-* __Dirichlet Boundary Conditions__ (BCs)`: At the bottom and sides of the channel/river: `v = 0 m/s`. At the top (surface): fixed `v = vz`.
+* __Dirichlet Boundary Conditions__ (BCs): At the bottom and sides of the channel/river: `v = 0 m/s`. At the top (surface): fixed `v = vz`.
 * The shape of the `domain` is a rectangle of `height H` and `width W`. Values for these: `H = 1m` and `W = 2m`.
 * `Dynamic Viscosity, mu = 1 N.s/m^2`.
 * `Pressure Gradient, dp/dz = -6 N/m^3`.
