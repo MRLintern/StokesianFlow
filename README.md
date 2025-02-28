@@ -5,12 +5,13 @@
 * My solution to the case study involves refactoring the software into __C++11__, utilising __OOD__ principles and the __Eigen Template Library__.
 
 ### TODO
-* New, `main.cpp`, uploaded. Added some comments, renamed some variables; all for better clarification. File compiles to binary, but still plagued with the error/issue below.
-* Error: `Assertion `row >= 0 && row < rows() && col >= 0 && col < cols()' failed.`; to be resolved in the next few days.
-* Error: Data not written to files.
+
+* New working source file uploaded along with a Makefile.
+* __Issue__: Works fine with `C-Syle casts`, however I need/want to use the `static_cast` operator; `Flow-Rate = nan` using this.
+* __Issue__: If you don't press 1 for verbose mode, no data is written to the files. 
 * Use better Software Engineering principles and tools. I.e.
    - `CMake`.
-   - `Unit Testing`. This isn't a massive code base, so I'll do this last (I imagine).
+   - `Unit Testing`. This isn't a massive code base, so I'll do this last (in the future).
    - Code organisation. I.e. classes into header files etc.
 
 ## Introduction
@@ -127,9 +128,12 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 
 * `$ git clone https://github.com/MRLintern/viscousRiver.git`
 * `$ cd viscousRiver`
-* `$ g++ main.cpp -o main`
+* `$ make main`
 * `$ ./main`
-* Press 1 for `verbose mode`; you'll get the node and element values. Press 0 if you don't want to see these.
+* `Press 1 for verbose mode`.
+* To delete the binary and files:
+* `$ make clean`
+
 * __TODO__; not using `CMake` yet.
 * `$ mkdir build && cd build`
 * `$ cmake ..`
