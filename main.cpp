@@ -1,332 +1,242 @@
-// single source file; to be broken down into header, source and driver files
-
 #include <iostream>
-#include <fstream>
 #include <cmath>
+#include <fstream>
 #include <random>
 #include <vector>
 #include <array>
 #include <Eigen/Dense>
 
-// -- Vector.hpp
+// Vector.hpp
 
-// vector class for vectors & associated objects
 class Vector {
 
     public:
 
-    // coordinates
-    double x{}, y{};
+        double x{};
+        double y{};
 
-    // initialise coordinates of vector object
-    Vector () {x = 0.0; y = 0.0;}
+        Vector() {x = 0.0; y = 0.0;};
 
-    // initialize coordinates to initial coordinate values
-    Vector (double x0, double y0) {x = x0; y = y0;}
+        Vector (double x0, double y0) {
 
-    // setup vector object method
-    void setVector (double x0, double y0) {x = x0; y = y0;}
+            x = x0; y = y0;
+        };
 
-    // metric: distance between points
-    double distance() {
+        void setVector(double x0, double y0) {
 
-        return sqrt(x*x + y*y);
-    }
+            x = x0; y = y0;
 
-    // -- assignment and operator overloading
+        }
+
+        double metric() {
+
+            return sqrt(x*x + y*y);
+        }
 
     double operator*(const Vector &otherVector);
     Vector operator+(const Vector &otherVector);
     Vector operator-(const Vector &otherVector);
+    friend std::ostream &operator<<(std::ostream &output, Vector v0) {
 
-    // for output; initial velocity at (x,y)
-	friend std::ostream &operator<<(std::ostream &out, Vector v0) {
+        output<<v0.x<<" "<<v0.y;
+        return output;
+    }
+};
 
-		out<<v0.x<<" "<<v0.y;
+// end of Vector.hpp
 
-		return out;
-	}
+// ------------------------------------------------------------------------------------------------
 
-}; // end of Vector class; to be placed in Vector.hpp
+// Vector.cpp
 
-// -- Vector.cpp
-
-// overload binary - operator; difference between 2 vectors
 Vector Vector::operator-(const Vector &otherVector) {
 
     return Vector(x - otherVector.x, y - otherVector.y);
 }
 
-// overload binary + operator; addition of 2 vectors
 Vector Vector::operator+(const Vector &otherVector) {
 
     return Vector(x + otherVector.x, y + otherVector.y);
 }
 
-// overload * operator for dot product
 double Vector::operator*(const Vector &otherVector) {
 
     return x*otherVector.x + y*otherVector.y;
 }
 
-// overload * operator for v0; lhs = left-hand side; rhs = right-hand side
-// lhsVector
-Vector operator*(const double &lhsVector, const Vector &rhsVector) {
+Vector operator*(const double &lhs, const Vector &rhs) {
 
-    Vector v0 = Vector(lhsVector*rhsVector.x, lhsVector*rhsVector.y);
-
-    return v0; 
-}
-
-// overload * operator for v0; lhs = left-hand side; rhs = right-hand side
-// rhsVector
-Vector operator*(const Vector &lhsVector, const double &rhsVector) {
-
-    Vector v0 = Vector(rhsVector*lhsVector.x, rhsVector*lhsVector.y);
+    Vector v0 = Vector(lhs*rhs.x, lhs*rhs.y);
 
     return v0;
 }
 
-// overload / operator for v0
-Vector operator/(const Vector &lhsVector, const double &rhsVector) {
+Vector operator*(const Vector &lhs, const double &rhs) {
 
-    Vector v0 = Vector(lhsVector.x/rhsVector, lhsVector.y/rhsVector);
+    Vector v0 = Vector(rhs*lhs.x, rhs*lhs.y);
 
     return v0;
 }
+
+Vector operator/(const Vector &lhs, const double &rhs) {
+
+    Vector v0 = Vector(lhs.x/rhs, lhs.y/rhs);
+
+    return v0;
+}
+
+// end of Vector.cpp
 
 // ------------------------------------------------------------------------------------------------
 
-// -- Geometry.cpp
+// Geometry.cpp
 
-// identifier for nodes of type int for the mesh
 using node = int;
-
-// identifier for elements of type int for the mesh
 using element = int;
-
-// vector to hold coordinates of nodes
 Vector *Node {nullptr};
-
-// a custom matrix identifier; the # of rows not known at compile-time; # of columns (3) known at compile-time.
-// the matrix identifier allows us to create a variable which will track the nodes associated with elements of the mesh
 using matrixElement = Eigen::Matrix<int, Eigen::Dynamic, 3>;
-
-// element which will track nodes associated with mesh elements
 matrixElement nodeElement;
 
-// function which calculates area of element(s)
 double area(element e) {
 
-    // x component
     double a1 {Node[nodeElement(e, 1)].x - Node[nodeElement(e, 0)].x};
     double a2 {Node[nodeElement(e, 0)].x - Node[nodeElement(e, 2)].x};
-
-    // y component
     double b1 {Node[nodeElement(e, 0)].y - Node[nodeElement(e, 1)].y};
     double b2 {Node[nodeElement(e, 2)].y - Node[nodeElement(e, 0)].y};
 
     return 0.5*(a1*b2 - a2*b1);
 }
 
-// function calculates center of mass of elements
 Vector com(element e) {
 
     return (Node[nodeElement(e, 0)] + Node[nodeElement(e, 1)] + Node[nodeElement(e, 2)])/3.0;
-
 }
 
-// main.cpp
+// end of Geometry.cpp
+
+// ----------------------------------------------------------------
+
+// main
 
 int main() {
 
-    // verbose: this setting will provide the option do display more data
     int verbose {0};
+    int NodeX {6}, NodeY {6};
+    double HW {0.5};
+    double Pz {-6};
+    double Vz {0.0};
+    std::ofstream meshPts, eProps, uSol;
+    meshPts.open("meshPoints.dat");
+    eProps.open("elementProperties.dat");
+    uSol.open("uSolution.dat");
 
-    std::cout<<"Do want to use verbose mode? Enter 1 for yes, 0 for no\n";
+    std::cout<<"Enter 1 for verbose mode, 0 if not\n";
     std::cin>>verbose;
 
-    // nodes in x and y directions
-    int NodeX {6}, NodeY {6}; // 6 x 6 mesh 
-
-    // H/W ratio
-    double HW {0.5};
-
-    // pressure gradient Pz = (1/mu) * dp/dz
-    double Pz {-6};
-
-    // initial velocity at the top of the channel
-    double Vz {0.0};
-
-    // file objects
-    std::ofstream meshPts, eleProps, uSol;
-
-    // files to open for calculated data
-    meshPts.open("meshPoints.dat"); // coordinates in the mesh
-    eleProps.open("elementProps.dat"); // element properties; com, area etc
-    uSol.open("uSolution.dat"); // solution, u, at nodes in mesh
-
-    // find total number of nodes used
     int totalNodes {NodeX*NodeY};
-
-    // find total number of elements used
     int totalElements {(NodeX - 1)*(NodeY - 1)*2};
 
-    // output to screen total number of nodes & elements used
-    std::cout<<"Number of nodes used: "<<totalNodes<<"\n";
-    std::cout<<"Number of elements used: "<<totalElements<<"\n";
+    std::cout<<"Total Number of Nodes: "<<totalNodes<<"\n";
+    std::cout<<"Total Number of Elements: "<<totalElements<<"\n";
 
-    // -- Vector & Matrix constructors for FEM; all of these are dynamic-size and of type double
-	// ------------------------------------------------------------------------------------------
-
-    // f: force acting on fluid; the only force we consider is the contribution of the pressure gradient
-    // u: fluid flow velocity
-    Eigen::VectorXd u(totalNodes), f(totalNodes);
-
-    // stiffness matrix; represents the system of linear equations that relates the nodal displacements of the fluid to the forces acting on them
+    Eigen::VectorXd f(totalNodes), u(totalNodes);
     Eigen::MatrixXd K(totalNodes, totalNodes);
-
-    // ------------------------------------------------------------------------------------------------------------------------
-
-    // initialise nodeElement with matrix identifier; keep track of nodes associated with elements
     nodeElement = matrixElement(totalElements, 3);
 
-    // -- rectangle of nodes
-
-    // allocate memory for a vector of nodes
     Node = new Vector[totalNodes];
 
-    // node number; starting position
-    node nodeNumber{0};
+    node nodeNumber {0};
 
-    // iterate across rectangle of nodes for (x,y)
-    for (int iy{0}; iy < NodeY; iy++) {
-        for (int ix{0}; ix < NodeX; ix++) {
+    for (int iy {0}; iy < NodeY; iy++) {
+        for (int ix {0}; ix < NodeX; ix++) {
 
-            // make (x,y) values decimals; discretization leaves numbers as decimals
-            double x {static_cast<double>(ix/NodeX - 1)};
-            double y {static_cast<double>(iy/NodeY - 1)};
-
-            // scaling y with H/W ratio
+            
+            double x = (double) ix/(NodeX - 1);
+           
+            //# double x = static_cast<double>(ix/(NodeX - 1));
+            double y = (double) iy/(NodeY - 1);
+            
+            //# double y = static_cast<double>(iy/(NodeY - 1));
+            
             y *= HW;
-
-            // set node numbers with vector points x & y
             Node[nodeNumber].setVector(x, y);
-
-            // keep adding node numbers until rectangle is full
             nodeNumber++;
         }
     }
 
-    // label elements and specify their nodes
-    if (verbose) {std::cout<<"\n"<<"Element and Associated Nodes: "<<"\n\n";}
+    if (verbose) {std::cout<<"Element and Associated Nodes: "<<"\n";}
 
-    // iterate through the rectangle so we can list the elements and their nodes at (x,y)
-    for (int iy{0}; iy < NodeY; iy++) {
-        for (int ix{0}; ix < NodeX; ix++) {
+    for (int iy = 0; iy < NodeY - 1; iy++) {
+        for (int ix = 0; ix < NodeX - 1; ix++) {
 
-            // nodes for (x,y)
-            node i {iy*(NodeX - 1) + ix};
-            node j {ix + NodeX*iy};
+            node i = iy*(NodeX - 1) + ix;
+            element eNumber = 2*i;
+            node j = ix + NodeX*iy;
 
-            // element number
-            element elementNumber {2*i};
+            nodeElement(eNumber, 0) = j;
+            nodeElement(eNumber, 1) = j + NodeX + 1;
+            nodeElement(eNumber, 2) = j + NodeX;
 
-            // node/element positioning
-            nodeElement(elementNumber, 0) = j;
-            nodeElement(elementNumber, 1) = j + NodeX + 1;
-            nodeElement(elementNumber, 2) = j + NodeX;
+            if (verbose) {std::cout<<eNumber<<" "<<nodeElement(eNumber, 0)<<" "<<nodeElement(eNumber, 1)<<" "<<nodeElement(eNumber, 2)<<"\n";}
 
-            // output elements and nodes
-            if (verbose) {
+            eNumber++;
 
-                std::cout<<elementNumber<<" "<<nodeElement(elementNumber, 0)<<" "<<nodeElement(elementNumber, 1)<<" "<<nodeElement(elementNumber, 2)<<"\n";
-                
-            }
+            nodeElement(eNumber, 0) = j;
+            nodeElement(eNumber, 1) = j + 1;
+            nodeElement(eNumber, 2) = j + 1 + NodeX;
 
-            // update element numbers and nodes
-            elementNumber++;
-            nodeElement(elementNumber, 0) = j;
-            nodeElement(elementNumber, 1) = j + 1;
-            nodeElement(elementNumber, 2) = j + 1 + NodeX;
+            if (verbose) {std::cout<<eNumber<<" "<<nodeElement(eNumber, 0)<<" "<<nodeElement(eNumber, 1)<<" "<<nodeElement(eNumber, 2)<<"\n";}
 
-            // output updated element numbers and associated nodes
-            if (verbose) {
-
-                std::cout<<elementNumber<<" "<<nodeElement(elementNumber, 0)<<" "<<nodeElement(elementNumber, 1)<<" "<<nodeElement(elementNumber, 2)<<"\n";
-
-            }
         }
     }
 
-    // data to files
     if (verbose) {
+        std::cout<<" ----------------- "<<"\n";
 
-        std::cout<<" ------------------ "<<"\n";
-
-        // print out mesh points (nodes) to meshPts
-        for (element e{0}; e < totalElements; e++) {
+        for (element e = 0; e < totalElements; e++) {
 
             meshPts<<Node[nodeElement(e, 0)]<<" "<<Node[nodeElement(e, 1)]<<"\n";
             meshPts<<Node[nodeElement(e, 1)]<<" "<<Node[nodeElement(e, 2)]<<"\n";
             meshPts<<Node[nodeElement(e, 2)]<<" "<<Node[nodeElement(e, 0)]<<"\n";
-            // center of mass, com, and area of elements
-            eleProps<<e<<" "<<com(e)<<" "<<area(e)<<"\n";
-
+            eProps<<e<<" "<<com(e)<<" "<<area(e)<<"\n";
         }
     }
 
-    // see // -- Vector & Matrix constructors for FEM for more info
-    // configure stiffness matrix for finite element method (FEM)
-    // [K]{u} = {f}
-    // K = stiffness matrix; contains the system of linear equations
-    // u = nodal vector; fluid flow rate
-    // f = force; pressure gradient acting on the fluid
-    for (element e{0}; e < totalElements; e++) {
+    // stiffness matrix K
+    for (element e = 0; e < totalElements; e++) {
+        double beta[3], gamma[3];
+        // std::array<double, 3> beta{}
+        // std::array<double, 3> gamma{};
+        for (int i = 0; i < 3; i++) {
 
-        // these parameters act as weights for calculating the approx. value of K
-    	// the values these parameters take on can be adjusted to balance accuracy and stability
-        std::array<double, 3> beta{};
-        std::array<double, 3> gamma{};
-
-        // find beta and gamma values
-        for (int i{0}; i < 3; i++) {
-
-            int j {(i + 1) % 3};
-            int k {(i + 1) % 3};
+            int j = (i + 1) % 3;
+            int k = (i + 2) % 3;
 
             beta[i] = Node[nodeElement(e, j)].y - Node[nodeElement(e, k)].y;
             gamma[i] = Node[nodeElement(e, k)].x - Node[nodeElement(e, j)].x;
 
-            // print out values for beta, gamma associated element
             if (verbose) {std::cout<<e<<" "<<i<<" "<<beta[i]<<" "<<gamma[i]<<"\n";}
+
         }
 
-        // find K for each 3-nodal point element; triangle in 2D mesh
-        for (int i{0}; i < 3; i++) {
-            for (int j{0}; j < 3; j++) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
 
-                node I {nodeElement(e, i)};
-                node J {nodeElement(e, j)};
-
-                // stiffness matrix K
+                node I = nodeElement(e, i);
+                node J = nodeElement(e, j);
                 K(I, J) += (beta[i]*beta[j] + gamma[i]*gamma[j])/(4.0*area(e));
             }
         }
     }
 
-    // find the determinant of the stiffness matrix K
-    // if det[K] = 0, => there are no unique solutions and u can't be found
-
     if (verbose) {
 
-        std::cout<<" -------------- "<<"\n";
-        std::cout<<"K"<<"\n";
-        std::cout<<"det(k) = "<<K.determinant()<<"\n";
+        std::cout<<" --------------- "<<"\n";
+        std::cout<<"K "<<"\n";
+        std::cout<<"det(K) = "<<K.determinant()<<"\n";
 
-        // value of K at (i,j)
-        for (node i{0}; i < totalNodes; i++) {
-            for (node j{0}; j < totalNodes; j++) {
+        for (node i = 0; i < totalNodes; i++) {
+            for (node j = 0; j < totalNodes; j++) {
 
                 std::cout<<i<<" "<<j<<" "<<K(i, j)<<"\n";
             }
@@ -335,75 +245,71 @@ int main() {
         std::cout<<" --------------- "<<"\n";
     }
 
-    // assemble force vector: i.e. the pressure gradient acting on the fluid; Pz = (1/mu)*dp/dp
-    for (element e{0}; e < totalElements; e++) {
+    // force vector
+    for (element e = 0; e < totalElements; e++) {
 
-        // total force contribution on elements
-        double F {-Pz*area(e)/3.0};
+        double F = -Pz*area(e)/3.0;
 
-        // total force for each element
         f(nodeElement(e, 0)) += F;
         f(nodeElement(e, 1)) += F;
         f(nodeElement(e, 2)) += F;
-        
     }
 
-    // display force at nodes
     if (verbose) {
 
-        std::cout<<"f"<<"\n";
+        std::cout<<"f\n";
 
-        for (node i{0}; i < totalNodes; i++) {
+        for (node i = 0; i < totalNodes; i++) {std::cout<<i<<" "<<f(i)<<"\n";}
 
-            std::cout<<i<<" "<<f(i)<<"\n";
-        }
-
-        std::cout<<" ------------------- "<<"\n";
+        std::cout<<" --------------- "<<"\n";
     }
 
-    // -- Boundary conditions, BCs: Dirichlet; u = f = 0
+    // boundary conditions
+    for (node n = 0; n < NodeX; n++) {
 
-    // nodes on the boundary of the domain: top & bottom of channel
-    for (node n{0}; n < NodeX; n++) {
+        if (verbose) {
 
-        if (verbose) {std::cout<<"Boundary Nodes: "<<n<<" "<<n + NodeX*(NodeY - 1)<<"\n";}
+            std::cout<<"Boundary Nodes: "<<n<<" "<<n + NodeX*(NodeY - 1)<<"\n";
 
-        // stiffness matrix for BCs
+        }
+
         K(n, n) *= 1e12;
         K(n + NodeX*(NodeY - 1), n + NodeX*(NodeY - 1)) *= 1e12;
+        f(n) = 0.0*K(n,n);
+        f(n + NodeX*(NodeY - 1)) = Vz*K(n + NodeX*(NodeY - 1), n + NodeX*(NodeY - 1));   
+    }
 
-        // -- applied force/pressure gradient
-        // left hand side of channel
+    for (node n = 1; n < NodeY - 1; n++) {
+
+        if (verbose) {
+            
+            std::cout<<"Boundary Nodes: "<<n*NodeX<<" "<<n*NodeX + NodeX - 1<<"\n";
+        }
+
+        K(n*NodeX, n*NodeX) *= 1e12;
+        K(n*NodeX + NodeX - 1, n*NodeX + NodeX - 1) *= 1e12;
         f(n*NodeX) = 0.0*K(n*NodeX, n*NodeX);
-
-        // right hand side of channel
         f(n*NodeX + NodeX - 1) = 0.0;
     }
 
-    // -- find non-zero entries of the stiffness matrix
-    // holds entries of K matrix
     int num{0};
 
-    for (node n{0}; n < totalNodes; n++) {
-        for (node m{0}; m < totalNodes; m++) {
+    for (node n = 0; n < totalNodes; n++) {
+        for (node m = 0; m < totalNodes; m++) {
 
-            // add up non-zero entries for K
             if (K(n, m) != 0.0) num++;
         }
     }
 
-    // print out non-zero entries for K
-    std::cout<< --num<<"Non-Zero Elements in K"<<"\n";
+    std::cout<<"Non-Zero Elements in K: "<<--num<<"\n";
 
-    // find the fluid flow velocity u by inverting K
-    // Note: {u} = {F}[K]^-1
+    // solution
     u = K.inverse()*f;
 
-    // -- store fluid flow velocity solution u
-    int nx{1};
+    // store solution
+    int nx = 1;
 
-    // solution u for each node stored in file
-    for (node n{0}; n < totalNodes; n++) {
+    for (node n = 0; n < totalNodes; n++) {
 
         uSol<<Node[n]<<" "<<u(n)<<"\n";
 
@@ -412,18 +318,14 @@ int main() {
         if (nx > NodeX) {
 
             uSol<<" "<<"\n";
-
             nx = 1;
         }
     }
 
-    // -- now find the flow rate through the channel; integration
+    // obtain flow rate
+    double ut = 0.0;
 
-    // flow rate
-    double ut{0.0};
-
-    // find flow rate across all elements
-    for (element e{0}; e < totalElements; e++) {
+    for (element e = 0; e < totalElements; e++) {
 
         ut += area(e)*(u(nodeElement(e, 0)) + u(nodeElement(e, 1)) + u(nodeElement(e, 2)));
 
@@ -431,29 +333,18 @@ int main() {
 
     ut /= 3.0;
 
-    // display flow rate to screen
-    std::cout<<"Flow Rate = "<<ut<<"\n";
-
-    // -- free up memory and close files
+    std::cout<<"Flow-Rate = "<<ut<<"\n";
 
     delete[] Node;
+
     meshPts.close();
-    eleProps.close();
+    eProps.close();
     uSol.close();
 
-    // output messages to explain files
-    std::cout<<"Mesh Coordinates stored in meshPoints.dat"<<"\n";
-    std::cout<<"Total Elements, Center of Mass (of Elements) and Area of Elements stored inside elementProps.dat"<<"\n";
-    std::cout<<"Nodes and Velocity at Nodes stored inside uSolution.dat"<<"\n";
+    std::cout<<"Mesh Coordinates written to meshPoints.dat\n";
+    std::cout<<"Element e, Center of Mass & Area of Elements written to file elementProperties.dat\n";
+    std::cout<<"Node Number and Fluid Velocity at Nodes written to file uSolution.dat\n";
 
-    // end of program
+    return 0;
 
 }
-
-
-
-
-
-
-
-
