@@ -5,7 +5,7 @@
 * My solution to the case study involves refactoring the software into __C++11__, utilising __OOD__ principles and the __Eigen Template Library__.
 
 ### TODO
-
+* Add basic notes r.e. the underlying theory behind `FEM`.
 * __Issue__: If you don't press 1 for `verbose mode`, no data is written to the files so press it
 * Use better Software Engineering principles and tools. I.e.
    - `CMake`. A `Makefile` is provided for the build process
