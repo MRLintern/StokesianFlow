@@ -6,7 +6,8 @@
 
 ### TODO
 * Add basic notes r.e. the underlying theory behind `FEM`.
-* __Issue__: If you don't press 1 for `verbose mode`, no data is written to the files so press it
+* Data plotting. A `Python` script using `Matplotlib` or [https://www.paraview.org/](ParavView) is a good choice for such applications; I'm not too concerned about this ATM.
+* __Issue__: If you don't press 1 for `verbose mode`, no data is written to the files so press it.
 * Use better Software Engineering principles and tools. I.e.
    - `CMake`. A `Makefile` is provided for the build process
    - Code organisation. I.e. classes into header files etc.
