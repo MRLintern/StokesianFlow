@@ -6,18 +6,15 @@
 
 ### TODO
 
-* New working source file uploaded along with a `Makefile`.
-* __Issue__: Works fine with `C-Syle casts`, however I need/want to use the `static_cast` operator; `Flow-Rate = nan` using this.
-* __Issue__: If you don't press 1 for `verbose mode`, no data is written to the files. 
+* __Issue__: If you don't press 1 for `verbose mode`, no data is written to the files so press it
 * Use better Software Engineering principles and tools. I.e.
-   - `CMake`.
-   - `Unit Testing`. This isn't a massive code base, so I'll do this last (in the future).
+   - `CMake`. A `Makefile` is provided for the build process
    - Code organisation. I.e. classes into header files etc.
 
 ## Introduction
 
 This software consists of a `C++ solver` which solves the `Navier-Stokes Equation(s)` for a `viscous fluid` flowing in a `channel/river`.
-The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
+The domain is `discretised` via the `(Direct) Finite Element Method (FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
 This software calculates the __Velocity__ and using this, the __Flow Rate__ through the channel.
 
 ## Model
