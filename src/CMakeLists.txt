@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.18.3)
-project(matrix)
+project(viscousRiver)
 
 find_package(Eigen3 3.4 REQUIRED NO_MODULE)
 
