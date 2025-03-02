@@ -9,7 +9,6 @@
 * Data plotting. A `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/) is a good choice for such applications; I'm not too concerned about this ATM.
 * __Issue__: If you don't press 1 for `verbose mode`, no data is written to the files so press it.
 * Use better Software Engineering principles and tools. I.e.
-   - `CMake`. A `Makefile` is provided for the build process
    - Code organisation. I.e. classes into header files etc.
 
 ## Introduction
@@ -126,12 +125,9 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 
 * `$ git clone https://github.com/MRLintern/viscousRiver.git`
 * `$ cd viscousRiver`
-* `$ make main`
+* `$ mkdir build -p && cd build`
+* `$ cmake ..`
+* `$ cmake --build .`
 * `$ ./main`
 * `Press 1 for verbose mode`.
-* To delete the binary and files:
-* `$ make clean`
 
-* __TODO__; not using `CMake` yet.
-* `$ mkdir build && cd build`
-* `$ cmake ..`
