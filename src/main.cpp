@@ -38,12 +38,12 @@ class Vector {
         }
 
     // -- assignment and operator overloading
-    double operator*(const Vector &otherVector);
-    Vector operator+(const Vector &otherVector);
-    Vector operator-(const Vector &otherVector);
+    double operator*(const Vector& otherVector);
+    Vector operator+(const Vector& otherVector);
+    Vector operator-(const Vector& otherVector);
 
     // for output; initial velocity at (x, y)
-    friend std::ostream &operator<<(std::ostream &output, Vector v0) {
+    friend std::ostream& operator<<(std::ostream& output, Vector v0) {
 
         output<<v0.x<<" "<<v0.y;
         return output;
@@ -57,26 +57,26 @@ class Vector {
 // Vector.cpp
 
 // overload binary - operator; difference between 2 vectors
-Vector Vector::operator-(const Vector &otherVector) {
+Vector Vector::operator-(const Vector& otherVector) {
 
     return Vector(x - otherVector.x, y - otherVector.y);
 }
 
 // overload binary + operator; addition of 2 vectors
-Vector Vector::operator+(const Vector &otherVector) {
+Vector Vector::operator+(const Vector& otherVector) {
 
     return Vector(x + otherVector.x, y + otherVector.y);
 }
 
 // overload * operator for dot product
-double Vector::operator*(const Vector &otherVector) {
+double Vector::operator*(const Vector& otherVector) {
 
     // dot product
     return x*otherVector.x + y*otherVector.y;
 }
 
 // overload * operator; left hand side vector 
-Vector operator*(const double &lhsVector, const Vector &rhsVector) {
+Vector operator*(const double &lhsVector, const Vector& rhsVector) {
 
     // components of initial velocity vector
     Vector v0 = Vector(lhsVector*rhsVector.x, lhsVector*rhsVector.y);
@@ -85,7 +85,7 @@ Vector operator*(const double &lhsVector, const Vector &rhsVector) {
 }
 
 // overload * operator; right hand side vector
-Vector operator*(const Vector &lhsVector, const double &rhsVector) {
+Vector operator*(const Vector& lhsVector, const double &rhsVector) {
 
     // components of initial velocity vector
     Vector v0 = Vector(rhsVector*lhsVector.x, rhsVector*lhsVector.y);
@@ -94,7 +94,7 @@ Vector operator*(const Vector &lhsVector, const double &rhsVector) {
 }
 
 // overload / operator for initial velocity vector
-Vector operator/(const Vector &lhsVector, const double &rhsVector) {
+Vector operator/(const Vector& lhsVector, const double &rhsVector) {
 
     // components of initial velocity vector
     Vector v0 = Vector(lhsVector.x/rhsVector, lhsVector.y/rhsVector);
