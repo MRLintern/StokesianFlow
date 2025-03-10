@@ -36,7 +36,7 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 * The shape of the `domain` is a rectangle of `height H` and `width W`. Values for these: `H = 1m` and `W = 2m`.
 * `Dynamic Viscosity, mu = 1 N.s/m^2`.
 * `Pressure Gradient, dp/dz = -6 N/m^3`.
-* The ___Flow Rate___ through the channel/river is given by 
+* The ___Volumetric Flow Rate___ through the channel/river is given by 
 
 	`R = (1/2)*W*H*Vz*F_D - (1/2mu)*W*H^3*F_P`
 
