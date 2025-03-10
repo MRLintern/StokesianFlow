@@ -9,6 +9,7 @@
 * Data plotting. A `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/) is a good choice for such applications; I'm not too concerned about this ATM.
 * Use better Software Engineering principles and tools. I.e.
    - Code organisation. E.g. classes into header files etc.
+* Increase the number of nodes to increase the granularity of the mesh. Incorporating the __MPI__ API might be helpful with this.
 
 ## Introduction
 
