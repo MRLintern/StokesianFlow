@@ -60,7 +60,22 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 
 * TODO.
 
-### The Variational Method: FEM
+### Different Methods
+* There are several types of Finite Element Method. The most common approaches include, for example:
+#### The Direct Approach
+* This is approach used in this software.
+  
+* TODO
+
+#### The Weighted Residuals Approach
+
+* E.g. The ___Galerkin Method___
+
+* TODO
+
+#### The Variational Approach
+
+* e.g. The ___Rayleigh-Ritz Method___
 
 * TODO.
 
