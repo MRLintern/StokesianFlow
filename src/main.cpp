@@ -31,7 +31,7 @@ class Vector {
 
         }
 
-        // magnitude of vector; 2D Euclidean/Cartesian plane
+        // distance between points; 2D Euclidean/Cartesian plane
         double metric() {
 
             return sqrt(x*x + y*y);
