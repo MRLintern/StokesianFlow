@@ -2,13 +2,13 @@
 
 * Note: this project makes use of a lot material from the book ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
-* My solution to the case study involves refactoring the software into __C++11__, utilising __OOD__ principles and the __Eigen Template Library__.
+* My solution to the case study involves refactoring the software into __C++11__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
 
 ### TODO
 * Add basic notes r.e. the underlying theory behind `FEM`.
 * Data plotting. A `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/) is a good choice for such applications; I'm not too concerned about this ATM.
 * Use better Software Engineering principles and tools. I.e.
-   - Code organisation. I.e. classes into header files etc.
+   - Code organisation. E.g. classes into header files etc.
 
 ## Introduction
 
