@@ -13,7 +13,7 @@
 ## Introduction
 
 This software consists of a `C++ solver` which solves the `Navier-Stokes Equation(s)` for a `viscous fluid` flowing in a `channel/river`.
-The domain is `discretised` via the `(Direct) Finite Element Method (FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
+The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
 This software calculates the __Velocity__ and using this, the __Flow Rate__ through the channel.
 
 ## Model
@@ -63,7 +63,7 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 ### Different Methods
 * There are several types of Finite Element Method. The most common approaches include, for example:
 #### The Direct Approach
-* This approach is used in this software.
+
   
 * TODO
 
