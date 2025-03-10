@@ -4,6 +4,7 @@
 #include <random>
 #include <vector>
 #include <array>
+#include <memory>
 #include <Eigen/Dense>
 
 // Vector.hpp
@@ -45,13 +46,10 @@ class Vector {
         
 };
 
-// end of Vector.hpp
-// ------------------------------------------------------------------------------------------------
-
 // Vector.cpp
 
 // overload binary - operator; difference between 2 vectors
-Vector Vector::operator-(const Vector&otherVector) {
+Vector Vector::operator-(const Vector& otherVector) {
 
     return Vector(x - otherVector.x, y - otherVector.y);
 }
@@ -118,7 +116,7 @@ int NodeX {6}, NodeY {6};
 int totalNodes {NodeX*NodeY};
 
 // vector to hold coordinates of nodes
-Vector *Node = new Vector[totalNodes];
+std::unique_ptr<Vector[]> Node = std::make_unique<Vector[]>(totalNodes);
 
 // a custom matrix identifier; # of rows at compile-time; # of columns (3) at compile-time
 // the matrix identifier allows us to create a variable which will track the nodes associated with elements of the mesh
@@ -468,9 +466,8 @@ int main() {
 
     std::cout<<"Flow-Rate = "<<ut<<"\n";
 
-    // -- free up memory and make sure files are closed
-    delete[] Node;
-
+    // -- make sure files are closed
+   
     meshPts.close();
     eProps.close();
     uSol.close();
