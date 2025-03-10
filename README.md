@@ -63,7 +63,7 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 ### Different Methods
 * There are several types of Finite Element Method. The most common approaches include, for example:
 #### The Direct Approach
-* This is approach used in this software.
+* This approach is used in this software.
   
 * TODO
 
