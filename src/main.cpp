@@ -13,51 +13,45 @@ class Vector {
     public:
 
         // coordinates
-        double x{};
-        double y{};
+        double x{}, y{};
+
         // initialise coordinates
-        Vector() {x = 0.0; y = 0.0;};
+        Vector() { x = 0.0; y = 0.0; };
 
-        // initialise coordinates to those of initial coordinates
-        Vector (double x0, double y0) {
-
-            x = x0; y = y0;
-        };
+        // initialise coordinates to initial coordinate values
+        Vector (double x0, double y0) { x = x0; y = y0; };
 
         // set up vector
-        void setVector(double x0, double y0) {
+        void setVector(double x0, double y0) { x = x0; y = y0; }
 
-            x = x0; y = y0;
-
-        }
-
-        // distance between points; 2D Euclidean/Cartesian plane
+        // metric; distance between 2 points in the 2D Cartesian plane
         double metric() {
 
             return sqrt(x*x + y*y);
         }
 
-    // -- assignment and operator overloading
-    double operator*(const Vector& otherVector);
-    Vector operator+(const Vector& otherVector);
-    Vector operator-(const Vector& otherVector);
+        // -- assignment and operator overloading
+        double operator*(const Vector& otherVector);
+        Vector operator+(const Vector& otherVector);
+        Vector operator-(const Vector& otherVector);
 
-    // for output; initial velocity at (x, y)
-    friend std::ostream& operator<<(std::ostream& output, Vector v0) {
+        // for output; initial velocity at (x, y)
+        friend std::ostream& operator<<(std::ostream& output, Vector v0) {
 
-        output<<v0.x<<" "<<v0.y;
-        return output;
-    }
+            output<<v0.x<<" "<<v0.y;
+
+            return output;
+        }
+        
 };
 
 // end of Vector.hpp
-
 // ------------------------------------------------------------------------------------------------
 
 // Vector.cpp
 
 // overload binary - operator; difference between 2 vectors
-Vector Vector::operator-(const Vector& otherVector) {
+Vector Vector::operator-(const Vector&otherVector) {
 
     return Vector(x - otherVector.x, y - otherVector.y);
 }
@@ -114,8 +108,17 @@ using node = int;
 // identifier for elements of type int for the mesh
 using element = int;
 
+// total number of elements that make up the mesh
+int totalElements {(NodeX - 1)*(NodeY - 1)*2};
+
+// number of nodes in the x & y direction
+int NodeX {6}, NodeY {6};
+
+// total number of nodes used for mesh
+int totalNodes {NodeX*NodeY};
+
 // vector to hold coordinates of nodes
-Vector *Node {nullptr};
+Vector *Node = new Vector[totalNodes];
 
 // a custom matrix identifier; # of rows at compile-time; # of columns (3) at compile-time
 // the matrix identifier allows us to create a variable which will track the nodes associated with elements of the mesh
@@ -157,9 +160,7 @@ int main() {
     // allows data to be printed to the CLI; always choose 1!
     int verbose {0};
 
-    // number of nodes in the x & y direction
-    int NodeX {6}, NodeY {6};
-
+    
     // H/W ratio
     double HW {0.5};
 
@@ -179,12 +180,6 @@ int main() {
 
     std::cout<<"Enter 1 for verbose mode, 0 if not\n";
     std::cin>>verbose;
-
-    // total number of nodes used for mesh
-    int totalNodes {NodeX*NodeY};
-
-    // total number of elements that make up the mesh
-    int totalElements {(NodeX - 1)*(NodeY - 1)*2};
 
     // output total number of nodes and elements to the CLI
     std::cout<<"Total Number of Nodes: "<<totalNodes<<"\n";
@@ -208,7 +203,7 @@ int main() {
     // -- rectangle of nodes
 
     // allocate memory for a vector of nodes
-    Node = new Vector[totalNodes];
+    //Node = new Vector[totalNodes];
 
     // starting node
     node nodeNumber {0};
