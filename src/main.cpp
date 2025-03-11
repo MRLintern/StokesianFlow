@@ -25,8 +25,8 @@ class Vector {
         // set up vector
         void setVector(double x0, double y0) { x = x0; y = y0; }
 
-        // metric; distance between 2 points in the 2D Cartesian plane
-        double metric() {
+        // size of the vector; p-norm; p = 2 for this problem; Euclidean norm
+        double norm() {
 
             return sqrt(x*x + y*y);
         }
