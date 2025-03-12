@@ -56,10 +56,22 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 ## Finite Element Method (FEM)
 
 * This is a brief overview of what the method entails.
-
+, 
 ### Introduction
 
-* TODO.
+* The Finite Element Method (FEM) is a general numerical method for solving partial differential equations in two- or three-space variables.
+* The premise is very simple; continuous domains (geometries) are decomposed into discrete, connected regions (or __finite elements__).
+* A typical approach for using FEM involves the following steps:
+  	- ___Step 1___: Divide the domain of the problem into a collection of sub-domains, with each sub-domain represented by a set of __algebraic equations__ for the original differential equation(s).
+  	- ___Step 2___: Systematically recombining all sets of the algebraic equations into a __global system of equations__ for the final calculation.
+ 
+* The global system of equations takes the form:
+
+  	__[K]{u} = {F}__,
+  where __K__ is the ___stiffness matrix___, __u__ is the __nodal displacement vector__, the unknowns and __F__ is the ___nodal forces vector___.
+
+* For this project, __u__ represents the velocity of the fluid and __F__ represents the force due to pressure; i.e. the pressure gradient.
+* The stiffness matrix, __K__, in terms of fluid dynamics, represents the relationship between nodal displacements and applied forces, or the resistance of the fluid domain to deformation under external influences.
 
 ### Different Methods
 * There are several types of Finite Element Method. The most common approaches include, for example:
@@ -80,9 +92,7 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 
 * TODO.
 
-### Mesh Generation
 
-* TODO.
 
 ## Requirements
 
