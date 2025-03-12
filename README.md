@@ -68,9 +68,9 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 * The global system of equations takes the form:
 
   	__[K]{u} = {F}__,
-  where __K__ is the ___stiffness matrix___, __u__ is the __nodal displacement vector__, the unknowns and __F__ is the ___nodal forces vector___.
+  where __K__ is the ___stiffness matrix___, __u__ is the __nodal displacement vector__, the unknowns, and __F__ is the ___nodal forces vector___.
 
-* For this project, __u__ represents the velocity of the fluid and __F__ represents the force due to pressure; i.e. the pressure gradient.
+* For this project, __u__ represents the velocity field of the fluid and __F__ represents the force due to pressure; i.e. the pressure gradient.
 * The stiffness matrix, __K__, in terms of fluid dynamics, represents the relationship between nodal displacements and applied forces, or the resistance of the fluid domain to deformation under external influences.
 
 ### Different Methods
