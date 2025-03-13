@@ -76,9 +76,17 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 ### Different Methods
 * There are several types of Finite Element Method. The most common approaches include, for example:
 #### The Direct Stiffness Method
+* This is a __Matrix Method__ that uses the __stiffness relations__ of __elements__ to compute __member forces__ and __displacements__ in structures.
+* The system is modeled as a set of __interconnected elements__, and the __material stiffness__ properties of these __elements__ are compiled into a single matrix equation that governs the behavior of the entire structure.
+* ___Stiffness Matrix K___: A matrix that represents the __relationship__ between the __forces__ and __displacements__ at the __nodes__ of a structure or __element__.
+* ___Global Stiffness Matrix___: A __matrix__ obtained by __assembling__ the __individual element stiffness matrices__, representing the __overall stiffness__ of the entire structure.
 
-  
-* TODO
+  ##### Methodology:
+  - __Model Discretization__: The __structure is divided__ into a __mesh of finite elements__, and the __material properties__ and __geometry__ of each element are defined.
+  - __Element Stiffness Matrices__: For __each element__, a __stiffness matrix, k__ is derived, relating the __forces, F__ and __displacements, u__ at its __nodes__.
+  - __Assembly of Global Stiffness Matrix__: The __individual element stiffness matrices__ are ___assembled__ into a __global stiffness matrix__ which __represents__ the __overall stiffness__ of the structure.
+  - __Solving the System of Equations__: The __global stiffness matrix__, along with the __applied forces__ and __boundary conditions__, forms a __system of equations__ that can be __solved__ to __determine the displacements__ at the __nodes__ and the __forces__ within the __elements__.
+
 
 #### The Weighted Residuals Approach
 
