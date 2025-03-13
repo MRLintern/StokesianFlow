@@ -2,7 +2,7 @@
 
 * Note: this project makes use of a lot material from the book ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
-* My solution to the case study involves refactoring the software into __C++11__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
+* My solution to the case study involves refactoring the software into __C++14__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
 
 ### TODO
 * Add basic notes r.e. the underlying theory behind `FEM`.
@@ -75,7 +75,7 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 
 ### Different Methods
 * There are several types of Finite Element Method. The most common approaches include, for example:
-#### The Direct Approach
+#### The Direct Stiffness Method
 
   
 * TODO
