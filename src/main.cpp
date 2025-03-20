@@ -434,6 +434,9 @@ int main() {
     // find the fluid velocity solution by inverting the stiffness matrix
     // Note: {u} = {f}[K]^-1
     // Note: inverse() method from Eigen
+    // Note: for such a basic model, solving for {u} by direct inversion of [K] is fine.
+    // However, in reality the order of [K] can be very large and it becomes impractical to use .inverse().
+    // For such a situation, an iterative technique will be needed; e.g. Jacobi Method, Gauss-Seidal Method or Successive Over-Relaxation (SOR) Method.
     u = K.inverse()*f;
 
     // fluid velocity solution in uSolution.dat
