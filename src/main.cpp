@@ -287,9 +287,8 @@ int main() {
     // {f} = force; pressure gradient acting on fluid
     for (element e {0}; e < totalElements; e++) {
         
-        // beta & gamma
-        // these parameters act as weights for calculating the approx. value of K
-        // the values these parameters take on can be adjusted to balance accuracy and stability
+        // beta & gamma; shape functions
+        // - functions which interpolate the solution between the discrete values obtained at the mesh nodes.
         std::array<double, 3> beta{};
         std::array<double, 3> gamma{};
 
@@ -302,7 +301,7 @@ int main() {
             beta[i] = Node[nodeElement(e, j)].y - Node[nodeElement(e, k)].y;
             gamma[i] = Node[nodeElement(e, k)].x - Node[nodeElement(e, j)].x;
 
-            // display element and beta and gamma values
+            // display element, beta and gamma values
             if (verbose) {std::cout<<e<<" "<<i<<" "<<beta[i]<<" "<<gamma[i]<<"\n";}
 
         }
