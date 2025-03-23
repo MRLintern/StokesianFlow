@@ -9,7 +9,12 @@
 * Data plotting. A `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/) is a good choice for such applications; I'm not too concerned about this ATM.
 * Use better Software Engineering principles and tools. I.e.
    - Code organisation. E.g. classes into header files etc.
-* Increase the number of nodes to increase the granularity of the mesh. Incorporating the __MPI__ API might be helpful with this.
+
+### TODO: Further Work
+* __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
+* __Software Considerations__: Optimisation Flags; experiment on optimising the compiler for different levels of optimisation.
+* __Physics__: Increase Dynamic viscosity, `mu`.
+* __Physics__: Vary `H/W` ratio.
 
 ## Introduction
 
