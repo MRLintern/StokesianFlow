@@ -153,6 +153,10 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 
 `$ g++ main.cpp -o main`
 
+* Run the executable:
+
+`$ ./main`
+
 
 ## Getting & Running the Software
 
