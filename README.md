@@ -12,7 +12,7 @@
 
 ### TODO: Further Work
 * __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
-* __Software Considerations__: Optimisation Flags; experiment on optimising the compiler for different levels of optimisation.
+* __Software Considerations__: __Optimisation Flags__; experiment on optimising the compiler for different levels of optimisation.
 * __Physics__: Increase Dynamic viscosity, `mu`.
 * __Physics__: Vary `H/W` ratio.
 
