@@ -13,7 +13,7 @@ class Vector {
 
     public:
 
-        // coordinates
+        // components of vector in x- and y-directions
         double x{}, y{};
 
         // initialise coordinates
