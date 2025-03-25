@@ -217,7 +217,7 @@ int main() {
             // scaling y with H/W ratio
             y *= HW;
 
-            // set points for vector
+            // set points for vector components
             Node[nodeNumber].setVector(x, y);
 
             // update node number
