@@ -5,10 +5,10 @@
 * My solution to the case study involves refactoring the software into __C++14__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
 
 ### TODO
-* Add basic notes r.e. the underlying theory behind `FEM`.
 * Data plotting. A `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/) is a good choice for such applications; I'm not too concerned about this ATM.
 * Use better Software Engineering principles and tools. I.e.
    - Code organisation. E.g. classes into header files etc.
+   - At present, I'm currently developing: `Vector.h`, `Vector.cpp`, `Geometry.h`, `Geometry.cpp`, `FEM.h`, `FEM.cpp` and `main.cpp`.
 
 ### TODO: Further Work
 * __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
@@ -67,7 +67,7 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 * The Finite Element Method (FEM) is a general numerical method for solving partial differential equations in two- or three-space variables.
 * The premise is very simple; continuous domains (geometries) are decomposed into discrete, connected regions (or __finite elements__).
 * A typical approach for using FEM involves the following steps:
-  	- ___Step 1___: Divide the domain of the problem into a collection of sub-domains, with each sub-domain represented by a set of __algebraic equations__ for the original differential equation(s).
+  	- ___Step 1___: Divide the domain of the problem into a collection of sub-domains (__finite elements__), forming a __mesh__, with each sub-domain represented by a set of __algebraic equations__ for the original differential equation(s).
   	- ___Step 2___: Systematically recombining all sets of the algebraic equations into a __global system of equations__ for the final calculation.
  
 * The global system of equations takes the form:
@@ -80,32 +80,16 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 
 ### Different Methods
 * There are several types of Finite Element Method. The most common approaches include, for example:
+
 #### The Direct Stiffness Method
-* This is a __Matrix Method__ that uses the __stiffness relations__ of __elements__ to compute __member forces__ and __displacements__ in structures.
-* The system is modeled as a set of __interconnected elements__, and the __material stiffness__ properties of these __elements__ are compiled into a single matrix equation that governs the behavior of the entire structure.
-* ___Stiffness Matrix K___: A matrix that represents the __relationship__ between the __forces__ and __displacements__ at the __nodes__ of a structure or __element__.
-* ___Global Stiffness Matrix___: A __matrix__ obtained by __assembling__ the __individual element stiffness matrices__, representing the __overall stiffness__ of the entire structure.
-
-  ##### Methodology:
-  - __Model Discretization__: The __structure is divided__ into a __mesh of finite elements__, and the __material properties__ and __geometry__ of each element are defined.
-  - __Element Stiffness Matrices__: For __each element__, a __stiffness matrix, k__ is derived, relating the __forces, F__ and __displacements, u__ at its __nodes__.
-  - __Assembly of Global Stiffness Matrix__: The __individual element stiffness matrices__ are ___assembled___ into a __global stiffness matrix__ which __represents__ the __overall stiffness__ of the structure.
-  - __Solving the System of Equations__: The __global stiffness matrix__, along with the __applied forces__ and __boundary conditions__, forms a __system of equations__ that can be __solved__ to __determine the displacements__ at the __nodes__ and the __forces__ within the __elements__.
-
 
 #### The Weighted Residuals Approach
 
 * E.g. The ___Galerkin Method___
 
-* TODO
-
 #### The Variational Approach
 
 * e.g. The ___Rayleigh-Ritz Method___
-
-* TODO.
-
-
 
 ## Requirements
 
