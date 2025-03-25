@@ -83,6 +83,8 @@ This software calculates the __Velocity__ and using this, the __Flow Rate__ thro
 
 #### The Direct Stiffness Method
 
+* The __inverse__ of the  __Stiffness Matrix__, `K`, is performed directly; i.e. to find the __fluid flow vector__, __{u} = {F}[K]^-1__.
+
 #### The Weighted Residuals Approach
 
 * E.g. The ___Galerkin Method___
