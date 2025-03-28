@@ -8,7 +8,7 @@
 * Data plotting. A `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/) is a good choice for such applications; I'm not too concerned about this ATM.
 * Use better Software Engineering principles and tools. I.e.
    - Code organisation. E.g. classes into header files etc.
-   - At present, I'm currently developing: `Vector.h`, `Vector.cpp`, `Geometry.h`, `Geometry.cpp`, `FEM.h`, `FEM.cpp` and `main.cpp`.
+   - At present, I'm currently developing: `Vector.hpp`, `Vector.cpp`, `Solver.hpp`, `Solver.cpp` and `main.cpp`.
 
 ### TODO: Further Work
 * __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
