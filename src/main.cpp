@@ -142,6 +142,8 @@ double area(element e) {
 }
 
 // method to calculate the center of mass, com, of the elements e
+// useful for shape function construction & Interpolation; centroid can be used as a reference point for barycentric coordinates for triangular elements
+// The stiffness matrix, K, can be evaluated more efficiently in some cases using a centroid-based approximation.
 Vector com(element e) {
 
     return (Node[nodeElement(e, 0)] + Node[nodeElement(e, 1)] + Node[nodeElement(e, 2)])/3.0;
