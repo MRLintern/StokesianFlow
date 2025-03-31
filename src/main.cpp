@@ -466,6 +466,7 @@ int main() {
 
     }
 
+    // fluid-flow rate for vertices of triangular elements    
     ut /= 3.0;
 
     std::cout<<"Flow-Rate = "<<ut<<"\n";
