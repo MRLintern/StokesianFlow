@@ -36,19 +36,19 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 
 * `mu`: `Dynamic (Shear) Viscosity`: Dynamic viscosity is a fluid's resistance to flow and shear when an external force is applied. Taken to be constant.
 
-* `dp/dz`: This is the `Pressure Gradient`: the rate at which pressure changes over distance. Taken to be constant.
+* `dp/dz`: This is the `Pressure Gradient`: the rate at which pressure changes over distance. Taken to be constant. In the software, this represented by `Pz`.
 
 * Integrating the ODE with Boundary Conditions (BC, see below) to find the __Velocity Profile__ gives:
 
   	`u = yVz/H + Pz/2mu(y^2 - yH)`
 
-* __Dirichlet Boundary Conditions__ (BCs): At the bottom and sides of the channel/river: `v = 0 m/s`. At the top (surface): fixed `v = vz`.
+* __Dirichlet Boundary Conditions__ (BCs): At the bottom and sides of the channel/river: `v = 0 m/s`. At the top (surface): fixed `v = Vz`.
 * The shape of the `domain` is a rectangle of `height H` and `width W`. Values for these: `H = 1m` and `W = 2m`.
 * `Dynamic Viscosity, mu = 1 N.s/m^2`.
 * `Pressure Gradient, dp/dz = -6 N/m^3`.
 * The ___Volumetric Flow Rate___ through the channel/river is given by 
 
-	`R = (1/2)*W*H*Vz*F_D - (1/2mu)*W*H^3*F_P`
+	`R = (WHVz/)2F_D - (WPzH^3/12mu)F_P`
 
 * `F_D`: ___Drag Factor___; associated with the drag flow induced by the boundary velocity `Vz`.
 * `F_P`: ___Pressure Flow Shape___; due to the pressure gradient `p'` or `dp/dz`. 
