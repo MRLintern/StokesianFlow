@@ -18,24 +18,29 @@
 
 ## Introduction
 
-This software consists of a `C++ solver` which solves the `Navier-Stokes Equation(s)` for a `viscous fluid` flowing in a `channel/river`.
+This software, developed in Modern C++, models a Viscous Fluid flowing 
+This software models 
 The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
-This software calculates the __Velocity__ and using this, the __Flow Rate__ through the channel.
+This software calculates the __Velocity Profile__ and using this, the __Volumetric Flow Rate__ through the channel.
 
 ## Model
 
 * The model consists of a `channel` or rather, a `river`, flowing along the `z-axis (direction)`.
 * Note: all physical quantities use `S. I. units`.
-* The viscous fluid flows with `uniform velocity`, and has `no external forces` acting on it.
-* With this is mind, the `Navier-Stokes Equation(s)` are reduced to:
+* The viscous fluid flows with `uniform velocity`, and has `no external forces` acting on it. The only force acting on the flow is the __Pressure Gradient__.
+* If the rectangular channel is infinitely wide compared to its depth, `H << W`, the governing ODE is given by:
 
-	`grad(grad . v) = (1/mu)dp/dz`
+	`d^2 u/dy^2 = (1/mu)dp/dz`
 
-* `grad`: the (vector) gradient operator. Note the left-hand side is collectively called the `Laplacian of the velocity field`.
+* `d^2 u/d^2`: Second order derivative of the __Velcoity Field__.
 
 * `mu`: `Dynamic (Shear) Viscosity`: Dynamic viscosity is a fluid's resistance to flow and shear when an external force is applied. Taken to be constant.
 
 * `dp/dz`: This is the `Pressure Gradient`: the rate at which pressure changes over distance. Taken to be constant.
+
+* Integrating the ODE with Boundary Conditions (BC, see below) to find the __Velocity Profile__ gives:
+
+  	`u = yVz/H + Pz/2mu(y^2 - yH)`
 
 * __Dirichlet Boundary Conditions__ (BCs): At the bottom and sides of the channel/river: `v = 0 m/s`. At the top (surface): fixed `v = vz`.
 * The shape of the `domain` is a rectangle of `height H` and `width W`. Values for these: `H = 1m` and `W = 2m`.
