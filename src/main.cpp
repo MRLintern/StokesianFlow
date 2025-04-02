@@ -98,7 +98,7 @@ Vector operator/(const Vector& lhsVector, const double &rhsVector) {
 
 // ------------------------------------------------------------------------------------------------
 
-// Geometry.cpp
+
 
 // identifier for nodes of type int for the mesh
 using node = int;
@@ -149,7 +149,7 @@ Vector com(element e) {
     return (Node[nodeElement(e, 0)] + Node[nodeElement(e, 1)] + Node[nodeElement(e, 2)])/3.0;
 }
 
-// end of Geometry.cpp
+
 
 // ----------------------------------------------------------------
 
