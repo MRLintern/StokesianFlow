@@ -53,7 +53,8 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 * `F_D`: ___Drag Factor___; associated with the drag flow induced by the boundary velocity `Vz`.
 * `F_P`: ___Pressure Flow Shape___; due to the pressure gradient `p'` or `dp/dz`. 
 * The values of `F_D` & `F_P` provide an important ratio in modelling channel flow problems: the `aspect ratio`, `H/W`.
-* Both the `F_D` & `F_P` factors are __Hyperbolic Functions__. 
+* Because the `H/W` ratio is provided, `F_D` & `F_P` aren't calculated and included in the solver; they're just mentioned for the purposes of interest
+* Both the `F_D` & `F_P` factors are __Hyperbolic Functions__. These are complicated symbolically, and so are left out. See ___Finite Element Methods for Engineers, Fenner 1974___.
 * `H/W = 0.5` for this problem.
 * Properties:
 
