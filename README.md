@@ -165,3 +165,6 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 * `$ ./main`
 * `Press 1 for verbose mode`.
 
+## Results
+
+* The __Volumetric Flow Rate__ came in at around __0.031 m^3/s__.
