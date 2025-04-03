@@ -168,3 +168,4 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 ## Results
 
 * The __Volumetric Flow Rate__ came in at around __0.031 m^3/s__.
+* The __Velcoity Profile__ is provided in the file __uSolution.dat__.
