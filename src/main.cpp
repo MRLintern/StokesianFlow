@@ -289,8 +289,9 @@ int main() {
     // {f} = force; pressure gradient acting on fluid
     for (element e {0}; e < totalElements; e++) {
         
-        // beta & gamma; shape functions
-        // - functions which interpolate the solution between the discrete values obtained at the mesh nodes.
+        // beta & gamma; related to shape functions
+        // beta: difference in the y-coordinates of the nodes of the triangle; the gradient of the shape function in the y-direction
+        // gamma: difference in the x-coordinates of the nodes of the triangle; the gradient of the shape function in the x-direction
         std::array<double, 3> beta{};
         std::array<double, 3> gamma{};
 
