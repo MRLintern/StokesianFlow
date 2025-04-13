@@ -9,41 +9,39 @@
 
 // Vector.hpp
 
+// -- Represents a 2D vector with basic operations
+
 class Vector {
+public:
+    // Components of the vector
+    double x{0.0}, y{0.0};
 
-    public:
+    // Constructors
+    Vector() = default;
+    Vector(double x0, double y0) 
+        : x(x0), y(y0) {}
 
-        // components of vector in x- and y-directions
-        double x{}, y{};
+    // Set the vector components
+    void setVector(double x0, double y0) {
+        x = x0;
+        y = y0;
+    }
 
-        // initialise coordinates
-        Vector() { x = 0.0; y = 0.0; };
+    // Compute the Euclidean (p=2) norm of the vector
+    double norm() const {
+        return sqrt(x * x + y * y);
+    }
 
-        // initialise coordinates to initial coordinate values
-        Vector (double x0, double y0) { x = x0; y = y0; };
+    // Operator overloading for vector arithmetic
+    double operator*(const Vector& otherVector) const;
+    Vector operator+(const Vector& otherVector) const;
+    Vector operator-(const Vector& otherVector) const;
 
-        // set up vector
-        void setVector(double x0, double y0) { x = x0; y = y0; }
-
-        // size of the vector; p-norm; p = 2 for this problem; Euclidean norm
-        double norm() {
-
-            return sqrt(x*x + y*y);
-        }
-
-        // -- assignment and operator overloading
-        double operator*(const Vector& otherVector);
-        Vector operator+(const Vector& otherVector);
-        Vector operator-(const Vector& otherVector);
-
-        // for output; initial velocity at (x, y)
-        friend std::ostream& operator<<(std::ostream& output, Vector v0) {
-
-            output<<v0.x<<" "<<v0.y;
-
-            return output;
-        }
-        
+    // Output stream operator for displaying vector components
+    friend std::ostream& operator<<(std::ostream& output, const Vector& v) {
+        output << v.x << " " << v.y;
+        return output;
+    }
 };
 
 // Vector.cpp
