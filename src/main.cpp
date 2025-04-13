@@ -202,9 +202,6 @@ int main() {
 
     // -- rectangle of nodes
 
-    // allocate memory for a vector of nodes
-    //Node = new Vector[totalNodes];
-
     // starting node
     node nodeNumber {0};
 
