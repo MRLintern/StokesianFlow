@@ -9,6 +9,8 @@
 * Use better Software Engineering principles and tools. I.e.
    - Code organisation. E.g. classes into header files etc.
    - At present, I'm currently developing: `Vector.hpp`, `Vector.cpp`, `Solver.hpp`, `Solver.cpp` and `main.cpp`.
+ 
+* The software is currently being re-developed so its more modular. `C++17` features will also be used.
 
 ### TODO: Further Work
 * __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
