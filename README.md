@@ -6,11 +6,7 @@
 
 ### TODO
 * Data plotting. A `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/) is a good choice for such applications; I'm not too concerned about this ATM.
-* Use better Software Engineering principles and tools. I.e.
-   - Code organisation. E.g. classes into header files etc.
-   - At present, I'm currently developing: `Vector.hpp`, `Vector.cpp`, `Solver.hpp`, `Solver.cpp` and `main.cpp`.
- 
-* The software is currently being re-developed so its more modular. `C++17` features will also be used.
+* The software is being developed into a modular idiomatic `C++20` implementation.
 
 ### TODO: Further Work
 * __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
