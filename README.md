@@ -3,6 +3,7 @@ f
 * Note: this project makes use of a lot material from the book ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
 * My solution to the case study involves refactoring the software into __C++14__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
+* At the moment, the software has been developed using __C++14__. However, I'm refectoring the software using __C++20__ and making it modular; it currently consists of 1 `main.cpp` file.
 
 ### References: Books
 *  ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
@@ -12,7 +13,7 @@ f
 
 ### TODO
 * Data plotting. A `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/) is a good choice for such applications; I'm not too concerned about this ATM.
-* The software is being developed into a modular idiomatic `C++20` implementation.
+
 
 ### TODO: Further Work
 * __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
