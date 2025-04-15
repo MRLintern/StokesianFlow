@@ -6,7 +6,7 @@ f
 
 ### References: Books
 *  ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
-*  ___C++20 The Complete Guide__ by ___Nicolai M. Josuttis___.
+*  ___C++20 The Complete Guide___ by ___Nicolai M. Josuttis___.
 *  ___Beginning C++20 From Novice to Professional___ by ___Ivor Horton___ and ___Peter Van Weert___.
 *  ___Professional C++, Fifth Edition___, by ___Marc Gregoire___.
 
