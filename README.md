@@ -1,8 +1,14 @@
 # Viscous River
-
+f
 * Note: this project makes use of a lot material from the book ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
 * My solution to the case study involves refactoring the software into __C++14__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
+
+### References: Books
+*  ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
+*  ___C++20 The Complete Guide__ by ___Nicolai M. Josuttis___.
+*  ___Beginning C++20 From Novice to Professional___ by ___Ivor Horton___ and ___Peter Van Weert___.
+*  ___Professional C++, Fifth Edition___, by ___Marc Gregoire___.
 
 ### TODO
 * Data plotting. A `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/) is a good choice for such applications; I'm not too concerned about this ATM.
