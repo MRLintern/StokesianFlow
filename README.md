@@ -1,5 +1,5 @@
 # Viscous River
-f
+
 * Note: this project makes use of a lot material from the book ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
 * My solution to the case study involves refactoring the software into __C++14__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
@@ -11,15 +11,15 @@ f
 *  ___Beginning C++20 From Novice to Professional___ by ___Ivor Horton___ and ___Peter Van Weert___.
 *  ___Professional C++, Fifth Edition___, by ___Marc Gregoire___.
 
-### TODO
-* Data plotting. A `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/) is a good choice for such applications; I'm not too concerned about this ATM.
+### TODO: Needs to be Done
+* __Software Considerations__: `Unit Testing` with `Catch2`.
+* __Software Considerations__: __Data/Results Visualisation__: A `Python script` which uses `Matplotlib`.
 
-
-### TODO: Further Work
+### TODO: Possible Future Work
 * __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
 * __Software Considerations__: __Optimisation Flags__; experiment on optimising the compiler for different levels of optimisation.
-* __Physics__: Vary Dynamic viscosity, `mu`. Look at results for, e.g., golden syrup and water.
-* __Physics__: Vary `H/W` ratio.
+* __Physics__: Vary `Dynamic viscosity`, `mu`. Look at results for, e.g., golden syrup and water.
+* __Physics__: Vary `H/W ratio`.
 
 ## Introduction
 
