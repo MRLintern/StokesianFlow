@@ -107,10 +107,12 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 ## Requirements
 
 * Developed and tested on `Linux (Ubuntu 20.04)`.
-* Compiler: developed & tested with `g++ 13.1.0`.
+* Compiler: developed & tested with `g++ 13.1.0`. Your compiler needs to support `C++20` for future work.
 * The `Eigen C++ Template Library` for the `Linear Algebra`; version used: `3.4.0`.
 * `CMake` for building the software etc.
 * Knowledge of `Applied Mathematics`; e.g. `FEM`, `Numerical Linear Algebra & ODEs/PDEs`.
+* `matplotlib-cpp`. This will be used for plotting the `Velocity Profile` once the software has been made more modular.
+  
 
 ## Eigen Library
 
