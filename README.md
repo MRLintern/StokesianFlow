@@ -3,9 +3,11 @@
 * Note: this project makes use of a lot material from the book ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
 * My solution to the case study involves refactoring the software into __C++14__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
-* At the moment, the software has been developed using __C++14__. However, I'm refectoring the software using __C++20__ and making it modular; it currently consists of 1 `main.cpp` file.
 
-### References: Books
+### TODO: What Being Done?
+* Currently making the software more modular. At the moment, the software consists of 1 `main.cpp` file.
+
+### References: Books for Future Work
 *  ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 *  ___C++20 The Complete Guide___ by ___Nicolai M. Josuttis___.
 *  ___Beginning C++20 From Novice to Professional___ by ___Ivor Horton___ and ___Peter Van Weert___.
@@ -13,7 +15,7 @@
 
 ### TODO: Needs to be Done
 * __Software Considerations__: `Unit Testing` with `Catch2`.
-* __Software Considerations__: __Data/Results Visualisation__: A `Python script` which uses `Matplotlib`.
+* __Software Considerations__: __Data/Results Visualisation__: A `Python script` which uses `Matplotlib`. Ulternatively, `matplotlib-cpp` looks interesting.
 
 ### TODO: Possible Future Work
 * __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
