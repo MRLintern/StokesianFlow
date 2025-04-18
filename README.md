@@ -9,7 +9,7 @@
 
 ### References: Books for Future Work
 *  ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
-*  I want this software to developed in `C++20` once its been made more modular. The following books will hopefully help with this.
+*  I want this software to be developed in `C++20` once its been made more modular. The following books will hopefully help with this.
 *  ___C++20 The Complete Guide___ by ___Nicolai M. Josuttis___.
 *  ___Beginning C++20 From Novice to Professional___ by ___Ivor Horton___ and ___Peter Van Weert___.
 *  ___Professional C++, Fifth Edition___, by ___Marc Gregoire___.
