@@ -4,7 +4,7 @@
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
 * My solution to the case study involves refactoring the software into __C++14__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
 
-### TODO: What Being Done?
+### ___Status___: What Being Done?
 * Currently making the software more modular. At the moment, the software consists of 1 `main.cpp` file.
 
 ### References: Books for Future Work
