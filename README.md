@@ -151,35 +151,35 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 * [Download the latest version](http://eigen.tuxfamily.org/index.php?title=Main_Page#Download).
 * Extract it and move it to `/home/user`.
 
-`~/Downloads$ tar -xf eigen-3.4.0.tar.gz`
-`~/Downloads$ mv eigen-3.4.0 /home/user`
+* `~/Downloads$ tar -xf eigen-3.4.0.tar.gz`
+* `~/Downloads$ mv eigen-3.4.0 /home/user`
 
 * You'll need to make a `build directory` for `CMake`. 
 
-`~$ cd eigen-3.4.0`
-`~/eigen-3.4.0$ mkdir build && cd build`
+* `~$ cd eigen-3.4.0`
+* `~/eigen-3.4.0$ mkdir build && cd build`
 
 * Run `CMake`
 
-`~/eigen-3.4.0/build$ cmake ..`
+* `~/eigen-3.4.0/build$ cmake ..`
 
 * Now install `Eigen`
 
-`~/eigen-3.4.0/build$ sudo make install`
+* `~/eigen-3.4.0/build$ sudo make install`
 
 * symlink or copy the Eigen folder into `/usr/local/include/`
 
-`~/eigen-3.4.0/build$ sudo cp -r /usr/local/include/eigen3/Eigen /usr/local/include`
+* `~/eigen-3.4.0/build$ sudo cp -r /usr/local/include/eigen3/Eigen /usr/local/include`
 
 * And you're set! See the test program in `eigen_test` to ensure everything is working.
 
 * Inside the `eigen_test` folder, execute the following at the CLI:
 
-`$ g++ main.cpp -o main`
+* `$ g++ main.cpp -o main`
 
 * Run the executable:
 
-`$ ./main`
+* `$ ./main`
 
 
 ## Getting & Running the Software
