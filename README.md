@@ -93,18 +93,18 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 
 #### The Direct Stiffness Method
 
-* The __inverse__ of the  __Stiffness Matrix__, `K`, is performed directly; i.e. to find the __fluid flow vector__, __{u} = {F}[K]^-1__.
-  	 #### Element Stiffness Matrix
+* The __inverse__ of the  __Stiffness Matrix__, `K`, is performed directly; i.e. to find the __fluid flow vector__, __{u} = {F}[K]^-1__. This is the approach used in ___this project___.
+  	 #### 1. Element Stiffness Matrix
   	* Each __Finite Element__ (e.g., a bar, beam, or truss) has its own ___Local Stiffness Matrix___ `k`, which relates ___Nodal Displacements___ `u` to forces `f`: `f = ke`.
-  	 #### Assembly into Global System
+  	 #### 2. Assembly into Global System
   	* All ___Local Element Matrices___ are __assembled__ into a ___Global Stiffness Matrix___ `K` using __connectivity information__ (mapping __local DOFs__ to __global DOFs__). Note: `DOF = Degrees of Freedom`.
   	* The ___Global Force-Displacement System___: `Ku = F`, where `u` is the __vector__ of Global Displacements, and `F` is the __vector__ of ___Global Applied Forces___.
   	* Note: in this project, `u` represents the `Fluid Velocity` and `F` represents the `Pressure Gradient`.
-  	 #### Boundary Conditions
+  	 #### 3. Boundary Conditions
   	* Essential (___Dirichlet___) ___Boundary Conditions___ are applied by modifying `K` and `F` appropriately.
-  	 #### Solve for Displacements
+  	 #### 4. Solve for Displacements
   	* After assembling the system and applying boundary conditions, solve the resulting linear system for `u`.
-  	 #### Compute Internal Forces
+  	 #### 5. Compute Internal Forces
   	* Once ___Nodal Displacements___ are known, ___Internal Element Forces___ or ___Stresses___ can be computed using each ___Element’s Stiffness Relation___.   
 
 #### The Weighted Residuals Approach
