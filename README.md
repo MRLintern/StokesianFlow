@@ -7,12 +7,8 @@
 ### ___Status___: What Being Done?
 * Currently making the software more modular. At the moment, the software consists of 1 `main.cpp` file.
 
-### References: Books for Future Work
+### References
 *  ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
-*  I want this software to be developed in `C++20` once its been made more modular. The following books will hopefully help with this.
-*  ___C++20 The Complete Guide___ by ___Nicolai M. Josuttis___.
-*  ___Beginning C++20 From Novice to Professional___ by ___Ivor Horton___ and ___Peter Van Weert___.
-*  ___Professional C++, Fifth Edition___, by ___Marc Gregoire___.
 
 ### TODO: Needs to be Done
 * __Software Considerations__: `Unit Testing` with `Catch2`.
@@ -98,14 +94,35 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 #### The Direct Stiffness Method
 
 * The __inverse__ of the  __Stiffness Matrix__, `K`, is performed directly; i.e. to find the __fluid flow vector__, __{u} = {F}[K]^-1__.
+  	 #### Element Stiffness Matrix
+  	* Each __Finite Element__ (e.g., a bar, beam, or truss) has its own ___Local Stiffness Matrix___ `k`, which relates ___Nodal Displacements___ `u` to forces `f`: `f = ke`.
+  	 #### Assembly into Global System
+  	* All ___Local Element Matrices___ are __assembled__ into a ___Global Stiffness Matrix___ `K` using __connectivity information__ (mapping __local DOFs__ to __global DOFs__). Note: `DOF = Degrees of Freedom`.
+  	* The ___Global Force-Displacement System___: `Ku = F`, where `u` is the __vector__ of Global Displacements, and `F` is the __vector__ of ___Global Applied Forces___.
+  	* Note: in this project, `u` represents the `Fluid Velocity` and `F` represents the `Pressure Gradient`.
+  	 #### Boundary Conditions
+  	* Essential (___Dirichlet___) ___Boundary Conditions___ are applied by modifying `K` and `F` appropriately.
+  	 #### Solve for Displacements
+  	* After assembling the system and applying boundary conditions, solve the resulting linear system for `u`.
+  	 #### Compute Internal Forces
+  	* Once ___Nodal Displacements___ are known, ___Internal Element Forces___ or ___Stresses___ can be computed using each ___Element’s Stiffness Relation___.   
 
 #### The Weighted Residuals Approach
 
-* E.g. The ___Galerkin Method___
+* E.g. The ___Galerkin Method___.
+* __Foundation__: Derived from the method of ___Weighted Residuals___.
+* __Key Idea__: The error (residual) between the ___exact___ and ___approximate solution___ is made __orthogonal__ to a set of ___Weight (test) Functions___.
+* __Applications__: Widely used for both ___Linear___ and ___Nonlinear PDEs___ including __Heat Transfer__, __Elasticity__, and __Fluid Flow__.
+* __Key Feature__: Works even when no variational (energy) principle exists; flexible and broadly applicable.
 
 #### The Variational Approach
 
-* e.g. The ___Rayleigh-Ritz Method___
+* e.g. The ___Rayleigh-Ritz Method___.
+* __Foundation__: Based on the ___calculus of variations___ and ___Energy Minimization___.
+* __Key Idea__: The solution is found by ___Minimizing the total potential energy___ __or__ a ___Related Functional___.
+* __Requirements__: The __problem__ must be ___Self-Adjoint___ and have a ___Variational (energy) Formulation___.
+* __Applications__: __Structural Mechanics__, __Vibration Analysis__, and __Problems with Conservative Forces__.
+* __Key Feature__: Naturally provides ___Symmetric___ and ___Positive-Definite Stiffness Matrices___.
 
 ## Requirements
 
