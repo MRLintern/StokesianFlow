@@ -12,7 +12,7 @@
 
 ### TODO: Needs to be Done
 * __Software Considerations__: `Unit Testing` with `Catch2`.
-* __Software Considerations__: __Data/Results Visualisation__: A `Python script` which uses `Matplotlib`. Ulternatively, `matplotlib-cpp` looks interesting.
+* __Software Considerations__: __Data/Results Visualisation__: A `Python script` which uses `Matplotlib` to plot `.csv` files of the __Velocity Profile__ and each __node__.
 
 ### TODO: Possible Future Work
 * __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
