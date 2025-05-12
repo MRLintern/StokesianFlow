@@ -189,11 +189,11 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 * `$ mkdir build -p && cd build`
 * `$ cmake ..`
 * `$ cmake --build .`
-* `$ ./main`
+* `$ ./viscousRiver`
 * `Press 1 for verbose mode`.
 
 ## Results
 
-* The __Volumetric Flow Rate__ came in at around __0.031 m^3/s__.
-* TODO; Build and run the software to output `uSolution.dat`.
+* The __Volumetric Flow Rate__ came in at around `0.031 m^3/s`.
+* The results will be generated and found in the `build` directory when you run the software. However, I have made a directory called `Results` where you can view the 3 files.
 * The __Velcoity Profile__ is provided in the file `uSolution.dat`. To view this, you will need a `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/).
