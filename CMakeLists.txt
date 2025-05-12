@@ -1,14 +1,18 @@
 cmake_minimum_required(VERSION 3.18.3)
-project(viscousRiver)
 
-find_package(Eigen3 3.4 REQUIRED NO_MODULE)
+set(PROJECT_NAME viscousRiver)
+
+project(${PROJECT_NAME})
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall")
 set(CMAKE_CXX_REQUIRED True)
 
-set(SRC_FILES src/main.cpp)
+# Find Eigen
+find_package(Eigen3 3.4 REQUIRED NO_MODULE)
 
-include_directories(src)
+include_directories(include)
 
-add_executable(main ${SRC_FILES})
-target_link_libraries(main Eigen3::Eigen)
+file(GLOB SOURCES "./src/*.cpp" "./*.hpp")
+
+add_executable(${PROJECT_NAME} ${SOURCES})
