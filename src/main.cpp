@@ -1,157 +1,12 @@
+// driver for viscousRiver
+
 #include <iostream>
-#include <cmath>
 #include <fstream>
-#include <random>
-#include <vector>
 #include <array>
-#include <memory>
-#include <Eigen/Dense>
 
-// Vector.hpp
+#include "vector.hpp"
+#include "femSolver.hpp"
 
-// -- Represents a 2D vector with basic operations
-
-class Vector {
-public:
-    // Components of the vector
-    double x{0.0}, y{0.0};
-
-    // Constructors
-    Vector() = default;
-    Vector(double x0, double y0) 
-        : x(x0), y(y0) {}
-
-    // Set the vector components
-    void setVector(double x0, double y0) {
-        x = x0;
-        y = y0;
-    }
-
-    // Compute the Euclidean (p=2) norm of the vector
-    double norm() const {
-        return sqrt(x * x + y * y);
-    }
-
-    // Operator overloading for vector arithmetic
-    double operator*(const Vector& otherVector) const;
-    Vector operator+(const Vector& otherVector) const;
-    Vector operator-(const Vector& otherVector) const;
-
-    // Output stream operator for displaying vector components
-    friend std::ostream& operator<<(std::ostream& output, const Vector& v) {
-        output << v.x << " " << v.y;
-        return output;
-    }
-};
-
-// Vector.cpp
-
-// overload binary - operator; difference between 2 vectors
-Vector Vector::operator-(const Vector& otherVector) {
-
-    return Vector(x - otherVector.x, y - otherVector.y);
-}
-
-// overload binary + operator; addition of 2 vectors
-Vector Vector::operator+(const Vector& otherVector) {
-
-    return Vector(x + otherVector.x, y + otherVector.y);
-}
-
-// overload * operator for dot product
-double Vector::operator*(const Vector& otherVector) {
-
-    // dot product
-    return x*otherVector.x + y*otherVector.y;
-}
-
-// overload * operator; left hand side vector 
-Vector operator*(const double &lhsVector, const Vector& rhsVector) {
-
-    // components of initial velocity vector
-    Vector v0 = Vector(lhsVector*rhsVector.x, lhsVector*rhsVector.y);
-
-    return v0;
-}
-
-// overload * operator; right hand side vector
-Vector operator*(const Vector& lhsVector, const double &rhsVector) {
-
-    // components of initial velocity vector
-    Vector v0 = Vector(rhsVector*lhsVector.x, rhsVector*lhsVector.y);
-
-    return v0;
-}
-
-// overload / operator for initial velocity vector
-Vector operator/(const Vector& lhsVector, const double &rhsVector) {
-
-    // components of initial velocity vector
-    Vector v0 = Vector(lhsVector.x/rhsVector, lhsVector.y/rhsVector);
-
-    return v0;
-}
-
-// end of Vector.cpp
-
-// ------------------------------------------------------------------------------------------------
-
-
-
-// identifier for nodes of type int for the mesh
-using node = int;
-
-// identifier for elements of type int for the mesh
-using element = int;
-
-// total number of elements that make up the mesh
-int totalElements {(NodeX - 1)*(NodeY - 1)*2};
-
-// number of nodes in the x & y direction
-int NodeX {6}, NodeY {6};
-
-// total number of nodes used for mesh
-int totalNodes {NodeX*NodeY};
-
-// vector to hold coordinates of nodes
-std::unique_ptr<Vector[]> Node = std::make_unique<Vector[]>(totalNodes);
-
-// a custom matrix identifier; # of rows at compile-time; # of columns (3) at compile-time
-// the matrix identifier allows us to create a variable which will track the nodes associated with elements of the mesh
-using matrixElement = Eigen::Matrix<int, Eigen::Dynamic, 3>;
-
-// element which will track nodes associated with mesh elements
-matrixElement nodeElement;
-
-// function calculates the area (dx*dy) of elements making up the mesh
-// this is used for integrating the equation governing fluid flow rate
-// through the (elements that make up the) channel/river
-double area(element e) {
-
-    // x-components
-    double a1 {Node[nodeElement(e, 1)].x - Node[nodeElement(e, 0)].x};
-    double a2 {Node[nodeElement(e, 0)].x - Node[nodeElement(e, 2)].x};
-
-    // y-components
-    double b1 {Node[nodeElement(e, 0)].y - Node[nodeElement(e, 1)].y};
-    double b2 {Node[nodeElement(e, 2)].y - Node[nodeElement(e, 0)].y};
-
-    return 0.5*(a1*b2 - a2*b1);
-}
-
-// method to calculate the center of mass, com, of the elements e
-// useful for shape function construction & Interpolation; centroid can be used as a reference point for barycentric coordinates for triangular elements
-// The stiffness matrix, K, can be evaluated more efficiently in some cases using a centroid-based approximation.
-Vector com(element e) {
-
-    return (Node[nodeElement(e, 0)] + Node[nodeElement(e, 1)] + Node[nodeElement(e, 2)])/3.0;
-}
-
-
-
-// ----------------------------------------------------------------
-
-// main
 
 int main() {
 
@@ -159,7 +14,7 @@ int main() {
     int verbose {0};
 
     
-    // H/W ratio
+    // height : width of channel ratio: H/W ratio
     double HW {0.5};
 
     // Pressure gradient; the only force that acts on the fluid
@@ -168,15 +23,19 @@ int main() {
     // initial velocity at the top of the channel
     double Vz {0.0};
 
-    // file objects for output data; file extension: .dat
+    // -- file objects for output data; file extension: .csv
+    // meshPts: mesh coordinates
+    // eProps: element properties; node number of element etc
+    // uSol: fluid velocity at nodes
+
     std::ofstream meshPts, eProps, uSol;
 
     // open files
-    meshPts.open("meshPoints.dat");
-    eProps.open("elementProperties.dat");
-    uSol.open("uSolution.dat");
+    meshPts.open("meshPoints.csv");
+    eProps.open("elementProperties.csv");
+    uSol.open("uSolution.csv");
 
-    std::cout<<"Enter 1 for verbose mode, 0 if not\n";
+    std::cout<<"Enter 1 for verbose mode, 0 for not\n";
     std::cin>>verbose;
 
     // output total number of nodes and elements to the CLI
@@ -198,7 +57,7 @@ int main() {
     // element properties for nodes
     nodeElement = matrixElement(totalElements, 3);
 
-    // -- rectangle of nodes
+    // -- rectangle of nodes; i.e. rectangular mesh
 
     // starting node
     node nodeNumber {0};
@@ -284,11 +143,18 @@ int main() {
     // {f} = force; pressure gradient acting on fluid
     for (element e {0}; e < totalElements; e++) {
         
-        // beta & gamma; related to shape functions
-        // beta: difference in the y-coordinates of the nodes of the triangle; the gradient of the shape function in the y-direction
-        // gamma: difference in the x-coordinates of the nodes of the triangle; the gradient of the shape function in the x-direction
-        std::array<double, 3> beta{};
-        std::array<double, 3> gamma{};
+        // beta and gamma arrays
+        // ---------------------
+
+        // shape functions
+        // ---------------
+        // these interpolate the solution (e.g. fluid velocity) across the element
+        // beta and gamma are components of the shape functions derivatives; i.e. how they change across the element
+        // beta: difference in the y-coordinates of the nodes of the triangular element; the gradient of the shape function in the y-direction
+        // gamma: difference in the x-coordinates of the nodes of the triangular element; the gradient of the shape function in the x-direction
+
+        std::array<double, 3> beta{}; // i.e. beta[i] = y[j] - y[k]
+        std::array<double, 3> gamma{}; // i.e. gamma[i] = x[k] - x[j]
 
         // find beta and gamma for K
         for (int i = 0; i < 3; i++) {
@@ -296,10 +162,13 @@ int main() {
             int j {(i + 1) % 3};
             int k {(i + 2) % 3};
 
-            beta[i] = Node[nodeElement(e, j)].y - Node[nodeElement(e, k)].y;
-            gamma[i] = Node[nodeElement(e, k)].x - Node[nodeElement(e, j)].x;
+            // gradient of shape function in the y-direction
+            beta[i] = Node[nodeElement(e, j)].getY() - Node[nodeElement(e, k)].getY();
 
-            // display element, beta and gamma values
+            // gradient of shape function in the x-direction
+            gamma[i] = Node[nodeElement(e, k)].getX() - Node[nodeElement(e, j)].getX();
+
+            // display element, beta and gamma values at CLI
             if (verbose) {std::cout<<e<<" "<<i<<" "<<beta[i]<<" "<<gamma[i]<<"\n";}
 
         }
@@ -307,6 +176,7 @@ int main() {
         for (int i {0}; i < 3; i++) {
             for (int j {0}; j < 3; j++) {
 
+                // node positions for K
                 node I {nodeElement(e, i)};
                 node J {nodeElement(e, j)};
 
@@ -317,7 +187,7 @@ int main() {
     }
 
     // find the determinant of the stiffness matrix K
-    // Note: if | K | = 0; there are no unique solutions and u can't be found
+    // Note: if | K | = 0; there are no unique solutions and u can't be found; i.e. we can't find the fluid velocity
     if (verbose) {
 
         std::cout<<" --------------- "<<"\n";
@@ -359,7 +229,7 @@ int main() {
         std::cout<<" --------------- "<<"\n";
     }
 
-    // -- Dirichlet Boundary Conditions (BCs); u = f = 0
+    // -- Dirichlet Boundary Conditions (DBCs); u = f = 0
 
     // nodes on the boundary of the domain: top and bottom of the channel
     for (node n {0}; n < NodeX; n++) {
@@ -370,7 +240,7 @@ int main() {
 
         }
 
-        // -- stiffness matrix K for BCs
+        // -- stiffness matrix K for DBCs
 
         // bottom of channel
         K(n, n) *= 1e12;
@@ -397,18 +267,18 @@ int main() {
 
         // -- stiffness matrix K
 
-        // left hand side of the channel
+        // LHS of the channel
         K(n*NodeX, n*NodeX) *= 1e12;
 
-        // right hand side of the channel
+        // RHS of the channel
         K(n*NodeX + NodeX - 1, n*NodeX + NodeX - 1) *= 1e12;
 
         // -- applied force/pressure gradient
 
-        // left hand side of the channel
+        // LHS of the channel
         f(n*NodeX) = 0.0*K(n*NodeX, n*NodeX);
 
-        // right hand side of the channel
+        // RHS of the channel
         f(n*NodeX + NodeX - 1) = 0.0;
     }
 
@@ -420,8 +290,8 @@ int main() {
     for (node n {0}; n < totalNodes; n++) {
         for (node m {0}; m < totalNodes; m++) {
 
-            // find the sum of non-zero entries until the whole rectangle has been covered
-            if (K(n, m) != 0.0) num++;
+            // find the sum of non-zero entries until the whole rectangle has been covered; i.e. until n = m
+            if (K(n, m) != 0.0) { num++; }
         }
     }
 
@@ -434,9 +304,12 @@ int main() {
     // Note: for such a basic model, solving for {u} by direct inversion of [K] is fine.
     // However, in reality the order of [K] can be very large and it becomes impractical to use .inverse().
     // For such a situation, an iterative technique will be needed; e.g. Jacobi Method, Gauss-Seidal Method or Successive Over-Relaxation (SOR) Method.
+
+    // find u
     u = K.inverse()*f;
 
-    // fluid velocity solution in uSolution.dat
+    // -- fluid velocity solution in uSolution.csv
+
     int nx {1};
 
     for (node n {0}; n < totalNodes; n++) {
@@ -449,23 +322,24 @@ int main() {
         if (nx > NodeX) {
 
             uSol<<" "<<"\n";
+
             nx = 1;
         }
     }
 
-    // calculate the fluid flow rate; rate at which fluid moves through elements of mesh
-    double ut {0.0};
+    // -- calculate the fluid flow rate; rate at which fluid moves through elements of mesh
+    double vfr {0.0};
 
     for (element e {0}; e < totalElements; e++) {
 
-        ut += area(e)*(u(nodeElement(e, 0)) + u(nodeElement(e, 1)) + u(nodeElement(e, 2)));
+        vfr += area(e)*(u(nodeElement(e, 0)) + u(nodeElement(e, 1)) + u(nodeElement(e, 2)));
 
     }
 
     // fluid-flow rate for vertices of triangular elements    
-    ut /= 3.0;
+    vfr /= 3.0;
 
-    std::cout<<"Flow-Rate = "<<ut<<"\n";
+    std::cout<<"Flow-Rate = "<<vfr<<"\n";
 
     // -- make sure files are closed
    
@@ -473,10 +347,11 @@ int main() {
     eProps.close();
     uSol.close();
 
-    // simple messages to the CLI to tell user where calculated data has been placed
-    std::cout<<"Mesh Coordinates written to meshPoints.dat\n";
-    std::cout<<"Element e, Center of Mass & Area of Elements written to file elementProperties.dat\n";
-    std::cout<<"Node Number and Fluid Velocity at Nodes written to file uSolution.dat\n";
+    // -- simple messages to the CLI to tell user where calculated data has been placed
 
-    // end of main
+    std::cout<<"Mesh Coordinates written to meshPoints.csv\n";
+    std::cout<<"Element e, Center of Mass & Area of Elements written to file elementProperties.csv\n";
+    std::cout<<"Node Number and Fluid Velocity at Nodes written to file uSolution.csv\n";
+
+    
 }
