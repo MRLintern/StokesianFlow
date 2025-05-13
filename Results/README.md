@@ -1,5 +1,5 @@
 ## Results
 * This folder contains:
-    * `elementProperties.csv`.
-    * `meshPoints.csv`.
-    * `uSolution.csv`. This is the ___Velocity Profile___.
+    * `elementProperties.dat`.
+    * `meshPoints.dat`.
+    * `uSolution.dat`. This is the ___Velocity Profile___.
