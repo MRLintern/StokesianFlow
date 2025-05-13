@@ -5,14 +5,12 @@
 * My solution to the case study involves refactoring the software into __C++14__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
 
 ### ___Status___: What Being Done?
-* Currently making the software more modular. At the moment, the software consists of 1 `main.cpp` file.
-
+* Currently developing a `Python script` for plotting `uSolution.csv`; the __Velocity Profile__.
 ### References
 *  ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 
 ### TODO: Needs to be Done
 * __Software Considerations__: `Unit Testing` with `Catch2`.
-* __Software Considerations__: __Data/Results Visualisation__: A `Python script` which uses `Matplotlib` to plot `.csv` files of the __Velocity Profile__ and each __node__.
 
 ### TODO: Possible Future Work
 * __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
