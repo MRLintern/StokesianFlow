@@ -31,9 +31,9 @@ int main() {
     std::ofstream meshPts, eProps, uSol;
 
     // open files
-    meshPts.open("meshPoints.csv");
-    eProps.open("elementProperties.csv");
-    uSol.open("uSolution.csv");
+    meshPts.open("meshPoints.dat");
+    eProps.open("elementProperties.dat");
+    uSol.open("uSolution.dat");
 
     std::cout<<"Enter 1 for verbose mode, 0 for not\n";
     std::cin>>verbose;
@@ -349,9 +349,9 @@ int main() {
 
     // -- simple messages to the CLI to tell user where calculated data has been placed
 
-    std::cout<<"Mesh Coordinates written to meshPoints.csv\n";
-    std::cout<<"Element e, Center of Mass & Area of Elements written to file elementProperties.csv\n";
-    std::cout<<"Node Number and Fluid Velocity at Nodes written to file uSolution.csv\n";
+    std::cout<<"Mesh Coordinates written to meshPoints.dat\n";
+    std::cout<<"Element e, Center of Mass & Area of Elements written to file elementProperties.dat\n";
+    std::cout<<"Node Number and Fluid Velocity at Nodes written to file uSolution.dat\n";
 
     
 }
