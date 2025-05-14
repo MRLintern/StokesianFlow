@@ -1,11 +1,11 @@
-# Stokesian
+# StokesianFlow
 
 * Note: this project makes use of a lot material from the book ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
 * My solution to the case study involves refactoring the software into __C++14__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
 
 ### ___Status___: What Being Done?
-* Currently developing a `Python script` for plotting `uSolution.csv`; the __Velocity Profile__.
+* A `Python script` has been developed which plots a `quiver plot` of the __Velocity Profile__.
 ### References
 *  ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 
@@ -183,15 +183,15 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 ## Getting & Running the Software
 
 * `$ git clone https://github.com/MRLintern/StokesianFlow.git`
-* `$ cd Stokesian`
+* `$ cd StokesianFlow`
 * `$ mkdir build -p && cd build`
 * `$ cmake ..`
 * `$ cmake --build .`
-* `$ ./Stokesian`
+* `$ ./StokesianFlow`
 * `Press 1 for verbose mode`.
 
 ## Results
 
 * The __Volumetric Flow Rate__ came in at around `0.031 m^3/s`.
 * The results will be generated and found in the `build` directory when you run the software. However, I have made a directory called `Results` where you can view the 3 files.
-* The __Velcoity Profile__ is provided in the file `uSolution.dat`. To view this, you will need a `Python` script using `Matplotlib` or [ParaView](https://www.paraview.org/).
+* The __Velcoity Profile__ is provided in the file `uSolution.dat`. Instead of using the `Python script`, [ParaView](https://www.paraview.org/) can be used.
