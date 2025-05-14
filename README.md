@@ -1,4 +1,4 @@
-# Viscous River
+# Stokesian
 
 * Note: this project makes use of a lot material from the book ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
@@ -20,7 +20,7 @@
 
 ## Introduction
 
-This software, developed in Modern C++, models a Viscous Fluid flowing 
+This software, developed in Modern C++, models a ___Stokes Flow___, a fluid dominated by __Viscosity__.
 This software models 
 The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
 This software calculates the __Velocity Profile__ and using this, the __Volumetric Flow Rate__ through the channel.
@@ -29,7 +29,7 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 
 * The model consists of a `channel` or rather, a `river`, flowing along the `z-axis (direction)`.
 * Note: all physical quantities use `S. I. units`.
-* The viscous fluid flows with `uniform velocity`, and has `no external forces` acting on it. The only force acting on the flow is the __Pressure Gradient__.
+* The fluid flows with `uniform velocity`, and has `no external forces` acting on it. The only force acting on the flow is the __Pressure Gradient__.
 * If the rectangular channel is infinitely wide compared to its depth, `H << W`, the governing ODE is given by:
 
 	`d^2 u/dy^2 = (1/mu)dp/dz`
@@ -44,7 +44,7 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 
   	`u = yVz/H + Pz/2mu(y^2 - yH)`
 
-* __Dirichlet Boundary Conditions__ (BCs): At the bottom and sides of the channel/river: `v = 0 m/s`. At the top (surface): fixed `v = Vz`.
+* __Dirichlet Boundary Conditions (No-Slip)__ (BCs): At the bottom and sides of the channel/river: `v = 0 m/s`. At the top (surface): fixed `v = Vz`.
 * The shape of the `domain` is a rectangle of `height H` and `width W`. Values for these: `H = 1m` and `W = 2m`.
 * `Dynamic Viscosity, mu = 1 N.s/m^2`.
 * `Pressure Gradient, dp/dz = -6 N/m^3`.
@@ -75,13 +75,13 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 * The Finite Element Method (FEM) is a general numerical method for solving partial differential equations in two- or three-space variables.
 * The premise is very simple; continuous domains (geometries) are decomposed into discrete, connected regions (or __finite elements__).
 * A typical approach for using FEM involves the following steps:
-  	- ___Step 1___: Divide the domain of the problem into a collection of sub-domains (__finite elements__), forming a __mesh__, with each sub-domain represented by a set of __algebraic equations__ for the original differential equation(s).
+  	- ___Step 1___: Divide the domain of the problem into a collection of sub-domains (__finite elements__), forming a __mesh__, with each sub-domain represented by a system of __Linear Algebraic Equations__ for the original differential equation(s).
   	- ___Step 2___: Systematically recombining all sets of the algebraic equations into a __global system of equations__ for the final calculation.
  
 * The global system of equations takes the form:
 
   	__[K]{u} = {F}__,
-  where __K__ is the ___stiffness matrix___, __u__ is the __nodal displacement vector__, the unknowns, and __F__ is the ___nodal forces vector___.
+  where __K__ is the ___Stiffness Matrix___, __u__ is the __Nodal Displacement Vector__, the unknowns, and __F__ is the ___Nodal Forces Vector___.
 
 * For this project, __u__ represents the velocity field of the fluid and __F__ represents the force due to pressure; i.e. the pressure gradient.
 * The stiffness matrix, __K__, in terms of fluid dynamics, represents the relationship between nodal displacements and applied forces, or the resistance of the fluid domain to deformation under external influences.
@@ -91,7 +91,7 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 
 #### The Direct Stiffness Method
 
-* The __inverse__ of the  __Stiffness Matrix__, `K`, is performed directly; i.e. to find the __fluid flow vector__, __{u} = {F}[K]^-1__. This is the approach used in ___this project___.
+* The __inverse__ of the  __Stiffness Matrix__, `K`, is performed directly; i.e. to find the __Fluid flow Vector__, __{u} = {F}[K]^-1__. This is the approach used in ___this project___.
   	 #### 1. Element Stiffness Matrix
   	* Each __Finite Element__ (e.g., a bar, beam, or truss) has its own ___Local Stiffness Matrix___ `k`, which relates ___Nodal Displacements___ `u` to forces `f`: `f = ke`.
   	 #### 2. Assembly into Global System
@@ -182,12 +182,12 @@ This software calculates the __Velocity Profile__ and using this, the __Volumetr
 
 ## Getting & Running the Software
 
-* `$ git clone https://github.com/MRLintern/viscousRiver.git`
-* `$ cd viscousRiver`
+* `$ git clone https://github.com/MRLintern/StokesianFlow.git`
+* `$ cd Stokesian`
 * `$ mkdir build -p && cd build`
 * `$ cmake ..`
 * `$ cmake --build .`
-* `$ ./viscousRiver`
+* `$ ./Stokesian`
 * `Press 1 for verbose mode`.
 
 ## Results
