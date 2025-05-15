@@ -9,6 +9,9 @@
 ### References
 *  ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 
+### TODO: General
+* Provide sections on __Finite Element Theory__ and __Fluid Dynamics__.
+  
 ### TODO: Needs to be Done
 * __Software Considerations__: `Unit Testing` with `Catch2`.
 
@@ -20,10 +23,9 @@
 
 ## Introduction
 
-This software, developed in Modern C++, models a ___Stokes Flow___, a fluid dominated by __Viscosity__.
-This software models 
-The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
-This software calculates the __Velocity Profile__ and using this, the __Volumetric Flow Rate__ through the channel.
+* This software, developed in Modern C++, models a ___Stokes Flow___, a fluid dominated by __Viscosity__ rather than __Diffusion__.
+* The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
+* This software calculates the __Velocity Profile__ and using this, the __Volumetric Flow Rate__ through the channel.
 
 ## Model
 
