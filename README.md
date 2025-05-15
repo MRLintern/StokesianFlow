@@ -12,8 +12,8 @@
 ### TODO: General
 * Provide sections on __Finite Element Theory__ and __Fluid Dynamics__.
   
-### TODO: Needs to be Done
-* __Software Considerations__: `Unit Testing` with `Catch2`.
+### TODO: Software
+* Although the project has been completed without `Unit Testing` due to its simplicity, it would still be a good idea (for educational purposes) to include `Unit Testing` with a framework such as `Catch2`.
 
 ### TODO: Possible Future Work
 * __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
