@@ -195,5 +195,5 @@
 ## Results
 
 * The __Volumetric Flow Rate__ came in at around `0.031 m^3/s`.
-* The results will be generated and found in the `build` directory when you run the software. However, I have made a directory called `Results` where you can view the 3 files.
+* The results will be generated and found in the `build` directory when you run the software. However, I have made a directory called `Results` where you can view the generated files along with a `Python script` for plotting and a `png` image file of the fluid flow.
 * The __Velcoity Profile__ is provided in the file `uSolution.dat`. Instead of using the `Python script`, [ParaView](https://www.paraview.org/) can be used.
