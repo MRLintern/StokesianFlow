@@ -10,3 +10,6 @@
 * To generate the plot:
 * `$ python plot.py` inside `StokesianFlow/Results`.
 * Note: if you've built the project, run this in the `build` directory.
+
+## Analysis of Results (Plot)
+* TODO.
