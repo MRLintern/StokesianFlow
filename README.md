@@ -4,25 +4,6 @@
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
 * My solution to the case study involves refactoring the software into __C++14__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
 
-
-### References
-*  ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
-
-### Theory
-#### Fluid Dynamics: The Absolute Basics
-* TODO.
-#### Finite Element Method
-* TODO.
- 
-### TODO: Software
-* Although the project has been completed without `Unit Testing` due to its simplicity, it would still be a good idea (for educational purposes) to include `Unit Testing` with a framework such as `Catch2`.
-
-### TODO: Possible Future Work
-* __Software Considerations__: Increase the number of nodes significantly to increase the granularity of the mesh. Incorporating the __OpenMP__ or __MPI__ API might be helpful with this.
-* __Software Considerations__: __Optimisation Flags__; experiment on optimising the compiler for different levels of optimisation.
-* __Physics__: Vary `Dynamic viscosity`, `mu`. Look at results for, e.g., golden syrup and water.
-* __Physics__: Vary `H/W ratio`.
-
 ## Introduction
 
 * This software, developed in Modern C++, models a ___Stokes Flow___, a fluid dominated by __Viscosity__ rather than __Diffusion__.
@@ -192,6 +173,10 @@
 * `$ cmake --build .`
 * `$ ./StokesianFlow`
 * `Press 1 for verbose mode`.
+
+## References
+* ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
+
 
 ## Results
 
