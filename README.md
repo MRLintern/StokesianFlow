@@ -7,7 +7,7 @@
 ## Introduction
 
 * This software, developed in Modern C++, models a ___Stokes Flow___, a fluid dominated by __Viscosity__ rather than __Diffusion__.
-* The domain is `discretised` via the `Finite Element Method (FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
+* The domain is `discretised` via the `Finite Element Method`, `(FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
 * This software calculates the __Velocity Profile__ and using this, the __Volumetric Flow Rate__ through the channel.
 
 ## Model
