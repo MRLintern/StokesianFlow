@@ -78,9 +78,11 @@
 * The stiffness matrix, __K__, in terms of fluid dynamics, represents the relationship between nodal displacements and applied forces, or the resistance of the fluid domain to deformation under external influences.
 
 ### Different Methods
+---
 * There are several types of Finite Element Method. The most common approaches include, for example:
 
 #### The Direct Stiffness Method
+---
 
 * The __inverse__ of the  __Stiffness Matrix__, `K`, is performed directly; i.e. to find the __Fluid flow Vector__, __{u} = {F}[K]^-1__. This is the approach used in ___this project___.
   	 #### 1. Element Stiffness Matrix
@@ -97,6 +99,7 @@
   	* Once ___Nodal Displacements___ are known, ___Internal Element Forces___ or ___Stresses___ can be computed using each ___Element’s Stiffness Relation___.   
 
 #### The Weighted Residuals Approach
+---
 
 * E.g. The ___Galerkin Method___.
 * __Foundation__: Derived from the method of ___Weighted Residuals___.
@@ -105,6 +108,7 @@
 * __Key Feature__: Works even when no variational (energy) principle exists; flexible and broadly applicable.
 
 #### The Variational Approach
+---
 
 * e.g. The ___Rayleigh-Ritz Method___.
 * __Foundation__: Based on the ___calculus of variations___ and ___Energy Minimization___.
