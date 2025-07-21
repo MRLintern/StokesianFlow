@@ -1,16 +1,19 @@
 ## StokesianFlow
+---
 
 * Note: this project makes use of a lot material from the book ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 * Fenner provides a `Fortran 77` solver for the problem we're looking at.
 * My solution to the case study involves refactoring the software into __C++14__, utilising __OOD__ principles, __Modern C++ Memory Management__ and the __Eigen Template Library__.
 
 ## Introduction
+---
 
 * This software, developed in Modern C++, models a ___Stokes Flow___, a fluid dominated by __Viscosity__ rather than __Diffusion__.
 * The domain is `discretised` via the `Finite Element Method`, `(FEM)`. The resulting `System of Algebraic Equations` is handled and solved via the `Eigen C++ template library`.
 * This software calculates the __Velocity Profile__ and using this, the __Volumetric Flow Rate__ through the channel.
 
 ## Model
+---
 
 * The model consists of a `channel` or rather, a `river`, flowing along the `z-axis (direction)`.
 * Note: all physical quantities use `S. I. units`.
@@ -52,11 +55,13 @@
 * The number of __triangular elements__ that make up the mesh is denoted by `elementNumber`. 50 will be used in total.
 
 ## Finite Element Method (FEM)
+---
 
 * This is a brief overview of what the method entails.
 * To understand the theory of the Finite Element Method applied to Stokes Flow, click here [View PDF](./Fem-Theory.pdf)
 , 
 ### Introduction
+---
 
 * The Finite Element Method (FEM) is a general numerical method for solving partial differential equations in two- or three-space variables.
 * The premise is very simple; continuous domains (geometries) are decomposed into discrete, connected regions (or __finite elements__).
@@ -109,6 +114,7 @@
 * __Key Feature__: Naturally provides ___Symmetric___ and ___Positive-Definite Stiffness Matrices___.
 
 ## Requirements
+---
 
 * Developed and tested on `Linux (Ubuntu 20.04)`.
 * Compiler: developed & tested with `g++ 13.1.0`.
@@ -118,6 +124,7 @@
 
 
 ## Eigen Library
+---
 
 * Eigen is a C++ library of template headers used extensively for `Numerical Linear Algebra`.
 
@@ -166,7 +173,7 @@
 
 
 ## Getting & Running the Software
-
+---
 * `$ git clone https://github.com/MRLintern/StokesianFlow.git`
 * `$ cd StokesianFlow`
 * `$ mkdir build -p && cd build`
@@ -176,11 +183,14 @@
 * `Press 1 for verbose mode`.
 
 ## References
+---
 * ___Finite Element Methods for Engineers___ by ___Roger T. Fenner___.
 
 
 ## Results
+---
 
 * The __Volumetric Flow Rate__ came in at around `0.031 m^3/s`.
 * The results will be generated and found in the `build` directory when you run the software. However, I have made a directory called `Results` where you can view the generated files along with a `Python script` for plotting and a `png` image file of the fluid flow.
 * The __Velcoity Profile__ is provided in the file `uSolution.dat`. Instead of using the `Python script`, [ParaView](https://www.paraview.org/) can be used.
+---
