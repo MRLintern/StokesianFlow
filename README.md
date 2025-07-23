@@ -58,8 +58,7 @@
 ---
 
 * This is a brief overview of what the method entails.
-* To understand the theory of the Finite Element Method applied to Stokes Flow, click here [View PDF](./Fem-Theory.pdf)
-, 
+
 ### Introduction
 ---
 
