@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18.3)
+cmake_minimum_required(VERSION 4.0.2)
 
 set(PROJECT_NAME StokesianFlow)
 
